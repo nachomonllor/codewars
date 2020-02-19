@@ -1,0 +1,1 @@
+﻿public static ulong OddCount(ulong n) => n/2;
