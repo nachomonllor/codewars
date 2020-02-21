@@ -1,0 +1,101 @@
+﻿https://www.codewars.com/kata/sum-and-rest-the-number-with-its-reversed-and-see-what-happens/train/python
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+
+
+        static int revertir(int n)
+        {
+            int rev = 0;
+            while (n > 0)
+            {
+                rev = rev * 10 + (n % 10);
+                n /= 10;
+            }
+            return rev;
+        }
+
+        static int sum_dif_rev(int n)
+        {
+            int cont = 0;
+
+            int i = 1890;
+            int ans = i;
+            for (; cont < n; i++)
+            {
+                int rev = revertir(i);
+                int sum = i + rev;
+
+                if (i != rev)
+                {
+                    int dif = Math.Abs(i - rev);
+                    if (sum % dif == 0)
+                    {
+                        ans = i;
+                        cont++;
+                    }
+                }
+            }
+
+            return ans;
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            //Console.WriteLine(sum_dif_rev(41));
+            //Console.WriteLine(sum_dif_rev(42));
+            //Console.WriteLine(sum_dif_rev(43));
+
+            for (int i = 1; i <= 15; i++)
+            {
+                Console.WriteLine(i + " " + sum_dif_rev(i));
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+-----------------
+
+def revertir(n):
+    rev = 0
+    while(n > 0):
+        rev = rev * 10 + (n % 10)
+        n /= 10
+    return rev 
+    
+
+def sum_dif_rev(n):
+    cont = 0
+    i = 45 
+    ans = i 
+    while(cont < n):
+        #print(i)
+        rev = revertir(i)
+        suma = i + rev 
+        if(i != rev):
+            dif = abs(i - rev)
+            if(suma % dif == 0):
+                ans = i 
+                cont += 1
+                
+        i += 1 
+        
+    return ans 
+
+s = ""
+for i in range(1, 66):
+    s+=(sum_dif_rev(i) + " ")
+print(s)

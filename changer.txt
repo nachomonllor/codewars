@@ -1,0 +1,151 @@
+﻿https://www.codewars.com/kata/change-it-up/train/python
+
+
+
+
+
+def changer(string):
+    concat = ""
+    
+    for i in range(0, len(string)):
+        if(string[i].isalpha()):
+            if(string[i] in "aeiouAEIOU"):
+                concat += str(ord(chr(string[i])) + 1)
+            else:
+                if(string[i].isupper()):
+                    if(string[i] == 'Z'):
+                        concat += 'a'
+                    else:
+                        #concat += char.ToLower((char)((int)s[i] + 1));
+                        concat +=  str(chr(int(string[i]) + 1)).lower()
+                else:
+                    if(string[i] == 'a'):
+                        concat += 'Z'
+                    else:
+                        concat +=  str( chr( int(string[i]) + 1)).upper()
+        else:
+            concat += str((string[i]))
+    
+    return concat
+    
+print(changer("Cat30"))
+
+
+
+
+
+
+
+
+
+----------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+
+        static string changer(string s)
+        {
+            string concat = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (char.IsLetter(s[i]))
+                {
+                    if ("aeiouAEIOU".Contains(s[i]))
+                    {
+                        concat += (char)((int)s[i] + 1 );
+                    }
+                    else
+                    {
+                        if (char.IsUpper(s[i]))
+                        {
+                            if (s[i] == 'Z')
+                            {
+                                concat += 'a';
+                            }
+                            else
+                            {
+                                concat += char.ToLower((char)((int)s[i] + 1));
+                            }
+                        }
+                        else
+                        {
+                            if (s[i] == 'a')
+                            {
+                                concat += 'Z';
+                            }
+                            else
+                            {
+                                concat += char.ToUpper((char)((int )s[i] + 1));
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    concat += s[i].ToString();
+                }
+
+
+
+            }
+
+            return concat;
+
+        }
+
+        static void Main()
+        {
+            /*
+            Test.describe("Basic tests")
+            Test.assert_equals(changer('Cat30'), 'dbU30')
+            Test.assert_equals(changer('Alice'), 'bmjdf')
+            Test.assert_equals(changer('sponge1'), 'tqpOhf1')
+            Test.assert_equals(changer('Hello World'), 'Ifmmp xpsmE')
+            Test.assert_equals(changer('dogs'), 'Epht')
+            Test.assert_equals(changer('z'), 'A')
+            */
+
+            Console.WriteLine(changer("Cat30"));
+
+
+            Console.ReadLine();
+        }
+
+
+    }
+}
+
+
+
+-----------------------------------
+
+
+describe("Basic Tests", function(){ 
+it("It should works for basic tests.", function(){
+
+Test.assertEquals(minMaxGap([1,2,5,7,8]),3)
+
+Test.assertEquals(minMaxGap([1,2,3,4,5]),2)
+
+Test.assertEquals(minMaxGap([1,4,6]),5)
+
+Test.assertEquals(minMaxGap([1,2,5,7]),4)
+
+Test.assertEquals(minMaxGap([1,4,7]),6)
+
+Test.assertEquals(minMaxGap([1,11,23,35,48]),22)
+
+Test.assertEquals(minMaxGap([1,11,23,35,43]),20)
+
+Test.assertEquals(minMaxGap([1,2,3,7,8,9]),4)
+
+})})

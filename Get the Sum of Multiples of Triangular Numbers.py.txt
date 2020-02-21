@@ -1,0 +1,44 @@
+﻿def T(n):
+    return n * (n + 1) / 2
+
+def gcd(a, b):
+    if a == 0:
+        return b
+    return gcd(b % a, a)
+
+'''
+def gcd(a, b): 
+    while (a != b): 
+        if (a > b): 
+            a = a - b 
+        else: 
+            b = b - a 
+    return a
+'''
+def lcm(a, b):
+    return (a * b) / gcd(a, b)
+  
+
+def MinimoComunMultiplo(n):
+    mcm = 1
+    for i in range(1, n + 1):
+        mcm = lcm(mcm, T(i))
+    return mcm 
+
+def sum_mult_triangnum(n, m):
+    #your code here
+    #return sum_of_multiples 
+    if n < 2 or m < 2:
+        return 0 
+    
+    #primerosN = obtenerPrimerosNTerminos(n)
+    mcm = MinimoComunMultiplo(n)
+    
+    mterminos = []
+    ans = 0
+    suma = mcm
+    
+    for i in range(0, m):    
+        ans += suma
+        suma += mcm
+    return int(ans)

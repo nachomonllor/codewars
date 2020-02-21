@@ -1,0 +1,128 @@
+https://www.codewars.com/kata/positions-average/train/csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        //public static double PosAverage(string s)
+        //{
+        //    // your code
+        //    string[] spl0 = s.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+        //    string[] spl = new string[spl0.Length];
+        //    for (int i = 0; i < spl.Length; i++)
+        //    {
+        //        spl[i] = spl0[i].Trim();
+        //    }
+
+        //    double n = spl[0].Length;
+
+        //    int sum = 0;
+
+
+        //    for (int i = 0; i < spl.Length - 1; i++)
+        //    {
+        //        for (int j = i + 1; j < spl.Length; j++)
+        //        {
+        //            for (int pos = 0; pos < n; pos++)
+        //            {
+        //                if (spl[i][pos] == spl[j][pos])
+        //                {
+        //                    sum++;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    Console.WriteLine(sum);
+        //    return sum / (n * spl.Length);
+        //}
+
+
+        public static double PosAverage(string s)
+        {
+            // your code
+            string[] spl0 = s.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            string[] spl = new string[spl0.Length];
+            for (int i = 0; i < spl.Length; i++)
+            {
+                spl[i] = spl0[i].Trim();
+            }
+
+            double n = spl[0].Length;
+
+            double sum = 0;
+
+
+            double pares = 0;
+
+            for (int col = 0; col < n; col++)
+            {
+                int cero = 0;
+                int nueve = 0;
+                int seis = 0;
+                int cuatro = 0;
+
+                for (int fila = 0; fila < spl.Length; fila++)
+                {
+                    if (spl[fila][col] == '0')
+                    {
+                        cero++;
+                    }
+                    else if (spl[fila][col] == '9')
+                    {
+                        nueve++;
+                    }
+                    else if (spl[fila][col] == '6')
+                    {
+                        seis++;
+                    }
+                    else if (spl[fila][col] == '4')
+                    {
+                        cuatro++;
+                    }
+                }
+
+                if (cero > 1) pares++;
+                if (nueve > 1) pares++;
+                if (seis > 1) pares++;
+                if (cuatro > 1) pares++;
+
+                // sum += cero + nueve + seis + cuatro;
+
+            }
+
+            sum = (pares * (pares - 1)) / 2.0;
+            return sum;
+
+        }
+
+
+
+
+        static void Main(string[] args)
+        {
+
+            string s = "444996, 699990, 666690, 096904, 600644, 640646, 606469, 409694, 666094, 606490";
+           // string s = "466960, 069060, 494940, 060069, 060090, 640009, 496464, 606900, 004000, 944096";
+
+           // string s = "6900690040, 4690606946, 9990494604";
+
+            //assertFuzzy("466960, 069060, 494940, 060069, 060090, 640009, 496464, 606900, 004000, 944096", 26.6666666667);
+            //assertFuzzy("444996, 699990, 666690, 096904, 600644, 640646, 606469, 409694, 666094, 606490", 29.2592592593);
+
+
+            Console.WriteLine(PosAverage(s));
+
+            Console.ReadLine();
+
+        }
+    }
+}

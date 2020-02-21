@@ -1,0 +1,48 @@
+﻿7 kyu
+Unique numbers
+2194% of54216andzej.maciusovic
+JavaScript
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Forks (3)
+Discourse (11)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+You have to write a function uniqueNumbers which returns unique numbers array. You don't need to validate input arg arr. Retain the original order of the input.
+Examples:
+uniqueNumbers([1,1,2,2]) => [1,2]
+uniqueNumbers([1,2,3,1]) => [1,2,3]
+
+https://www.codewars.com/kata/unique-numbers/javascript
+//JavaScript-C24.2.0 (SpiderMonkey)
+
+//print("Hello, world!")
+
+function uniqueNumbers(numbersArray) {
+    //you must return unique numbers array
+    const mySet = new Set(numbersArray);
+
+    
+    
+    var res = [];
+    
+    for (let item of mySet.keys())  {
+        //print(item + " ");
+        res.push(item);
+    }
+    
+    return res;
+    
+}
+
+
+var arr = [ 1, 1,1,1,1,1,1,1,1,1,1,1,1];
+
+
+print(uniqueNumbers(arr));

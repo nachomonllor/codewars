@@ -1,0 +1,38 @@
+﻿https://www.codewars.com/kata/reversing-fun/train/csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        public static string FlipNumber(string n)
+        {
+
+            for(int i =0; i<n.Length; i++)
+            {
+                string sub = n.Substring(i, n.Length - i);
+                Console.WriteLine(sub);
+                char[] ch = sub.ToCharArray();
+                Array.Reverse(ch);
+                n = n.Substring(0, i) + new string(ch);
+            }
+            return n;
+        }
+
+
+        static void Main(string[] args)
+        {
+            //Console.WriteLine(  FlipNumber("1234567"));
+
+            Console.WriteLine(FlipNumber("012345"));
+
+
+            Console.ReadLine();
+        }
+    }
+}

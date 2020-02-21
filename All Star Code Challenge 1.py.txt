@@ -1,0 +1,4 @@
+def sum_ppg(playerOne, playerTwo):
+    # Your code here
+    #return 0
+    return playerOne['ppg'] + playerTwo['ppg' ]

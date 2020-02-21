@@ -1,0 +1,56 @@
+﻿https://www.codewars.com/kata/535bfa2ccdbf509be8000113/solutions/python
+
+
+class Primes:
+    
+    #criba = []
+    def __init__(self):
+        self.criba = self.manipulated_seive(5000000)
+    #    Primes.criba = Primes.manipulated_seive(100000)
+    # function generate all prime number  
+    # less then N in O(n) 
+    
+    def manipulated_seive(self, N):  
+      
+        isprime = [True] * N  
+        prime = []  
+        SPF = [None] * (N) 
+        # 0 and 1 are not prime  
+        isprime[0] = isprime[1] = False
+      
+        # Fill rest of the entries  
+        for i in range(2, N):  
+          
+            # If isPrime[i] == True then i is  
+            # prime number  
+            if isprime[i] == True:  
+              
+                # put i into prime[] vector  
+                prime.append(i)  
+      
+                # A prime number is its own smallest  
+                # prime factor  
+                SPF[i] = i  
+              
+            j = 0
+            while (j < len(prime) and
+                   i * prime[j] < N and
+                       prime[j] <= SPF[i]): 
+              
+                isprime[i * prime[j]] = False
+      
+                # put smallest prime factor of i*prime[j]  
+                SPF[i * prime[j]] = prime[j] 
+                  
+                j += 1
+        return prime
+        
+    
+    def first(self, N):
+        aux = []
+        for i in range(0, N):
+            aux.append(self.criba[i])
+        #self.criba = list(aux)
+        return aux
+        
+Primes = Primes()

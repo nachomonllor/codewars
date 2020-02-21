@@ -1,0 +1,207 @@
+﻿https://www.codewars.com/kata/permutational-primes/train/python
+
+import collections
+
+class OrderedSet(collections.MutableSet):
+
+    def __init__(self, iterable=None):
+        self.end = end = [] 
+        end += [None, end, end]         # sentinel node for doubly linked list
+        self.map = {}                   # key --> [key, prev, next]
+        if iterable is not None:
+            self |= iterable
+
+    def __len__(self):
+        return len(self.map)
+
+    def __contains__(self, key):
+        return key in self.map
+
+    def add(self, key):
+        if key not in self.map:
+            end = self.end
+            curr = end[1]
+            curr[2] = end[1] = self.map[key] = [key, curr, end]
+
+    def discard(self, key):
+        if key in self.map:        
+            key, prev, next = self.map.pop(key)
+            prev[2] = next
+            next[1] = prev
+
+    def __iter__(self):
+        end = self.end
+        curr = end[2]
+        while curr is not end:
+            yield curr[0]
+            curr = curr[2]
+
+    def __reversed__(self):
+        end = self.end
+        curr = end[1]
+        while curr is not end:
+            yield curr[0]
+            curr = curr[1]
+
+    def pop(self, last=True):
+        if not self:
+            raise KeyError('set is empty')
+        key = self.end[1][0] if last else self.end[2][0]
+        self.discard(key)
+        return key
+
+    def __repr__(self):
+        if not self:
+            return '%s()' % (self.__class__.__name__,)
+        return '%s(%r)' % (self.__class__.__name__, list(self))
+
+    def __eq__(self, other):
+        if isinstance(other, OrderedSet):
+            return len(self) == len(other) and list(self) == list(other)
+        return set(self) == set(other)
+
+
+#----------------------
+
+def next_permutation(arr):
+	# Find non-increasing suffix
+	i = len(arr) - 1
+	while i > 0 and arr[i - 1] >= arr[i]:
+		i -= 1
+	if i <= 0:
+		return False
+	
+	# Find successor to pivot
+	j = len(arr) - 1
+	while arr[j] <= arr[i - 1]:
+		j -= 1
+	arr[i - 1], arr[j] = arr[j], arr[i - 1]
+	
+	# Reverse suffix
+	arr[i : ] = arr[len(arr) - 1 : i - 1 : -1]
+	return True
+	
+	
+# Python3 program to generate all  
+# prime numbers less than N in O(N)  
+  
+#MAX_SIZE = 1000001
+  
+# isPrime[] : isPrime[i] is true if 
+#             number is prime  
+# prime[] : stores all prime number  
+#           less than N  
+# SPF[] that store smallest prime  
+# factor of number [for ex : smallest  
+# prime factor of '8' and '16'  
+# is '2' so we put SPF[8] = 2 ,  
+# SPF[16] = 2 ]  
+
+#isprime = [True] * MAX_SIZE  
+#prime = []  
+#SPF = [None] * (MAX_SIZE)  
+  
+# function generate all prime number  
+# less then N in O(n)  
+def manipulated_seive(N):  
+  
+    isprime = [True] * N  
+    prime = []  
+    SPF = [None] * (N) 
+    # 0 and 1 are not prime  
+    isprime[0] = isprime[1] = False
+  
+    # Fill rest of the entries  
+    for i in range(2, N):  
+      
+        # If isPrime[i] == True then i is  
+        # prime number  
+        if isprime[i] == True:  
+          
+            # put i into prime[] vector  
+            prime.append(i)  
+  
+            # A prime number is its own smallest  
+            # prime factor  
+            SPF[i] = i  
+          
+        # Remove all multiples of i*prime[j]  
+        # which are not prime by making is 
+        # Prime[i * prime[j]] = false and put 
+        # smallest prime factor of i*Prime[j] 
+        # as prime[j] [ for exp :let i = 5 , j = 0 , 
+        # prime[j] = 2 [ i*prime[j] = 10 ]  
+        # so smallest prime factor of '10' is '2'  
+        # that is prime[j] ] this loop run only one  
+        # time for number which are not prime  
+        j = 0
+        while (j < len(prime) and
+               i * prime[j] < N and
+                   prime[j] <= SPF[i]): 
+          
+            isprime[i * prime[j]] = False
+  
+            # put smallest prime factor of i*prime[j]  
+            SPF[i * prime[j]] = prime[j] 
+              
+            j += 1
+    #hash_primos = set(prime)
+    #h = set()
+    #for i in range(0, len(prime)):
+    #    h.add(prime[i])
+    
+    return OrderedSet(prime)
+    
+
+
+
+def permutational_primes(n_max, k_perms):
+    ans = []
+    hash_primos = manipulated_seive(n_max)
+    #print(hash_primos)
+    marcas = [False] * (n_max)
+    #print(marcas)
+    
+    for item in hash_primos:
+        ch = list(str(item))
+        if(marcas[item] == False):
+            num_perms = 0 
+            while(next_permutation(ch)):
+                marcas[int(''.join(ch))] = True 
+                if (int(''.join(ch)) in hash_primos):
+                    num_perms += 1 
+            marcas[item] = True 
+            if(num_perms == k_perms):
+                ans.append(item)
+    
+    if(len(ans) > 0):
+        r = ans 
+        return [len(r), r[0], r[len(r) - 1]]
+    return [0,0,0]
+    
+    
+    
+#for item in manipulated_seive(100):
+#    print(item)
+    
+ans = permutational_primes(1000, 1)
+print(ans)
+
+'''
+item = 123
+ch = list(str(item))
+print(ch)
+
+x = int(''.join(ch))
+print(x)
+
+#hash_primos = manipulated_seive(100)
+
+#print(hash_primos)
+
+a = [1,2,3]
+print(a)
+while(next_permutation(a)):
+    print(a)
+  
+'''

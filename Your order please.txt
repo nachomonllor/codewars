@@ -1,0 +1,68 @@
+6 kyu
+Your order, please
+75513388% of3,9521,337 of27,465iamstone
+C#
+* TRAIN AGAIN
+* NEXT KATA
+Details
+Solutions
+Forks (19)
+Discourse (129)
+* Add to Collection
+* |
+* Share this kata:
+* 
+* 
+* 
+Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+Examples
+"is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+"4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+""  -->  ""
+https://www.codewars.com/kata/your-order-please/csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        public static string Order(string words)
+        {
+            string[] split = words.Trim().Split(' ');
+            string[] o = new string[split.Length];
+
+            for(int i =0; i<split.Length; i++)
+            {
+                for(int j =0; j<split[i].Length; j++)
+                {
+                    if(char.IsNumber(split[i][j]))
+                    {
+                        o[(split[i][j]-'0')-1] = split[i];
+                        break;
+                    }
+                }
+
+            }
+
+            return string.Join(" ", o);
+
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine(Order("is2 Thi1s T4est 3a"));
+            //"Thi1s is2 3a T4est"
+
+
+            Console.ReadLine();
+        }
+    }
+}
+
+

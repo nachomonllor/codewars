@@ -1,0 +1,42 @@
+http://www.codewars.com/kata/alphabet-symmetry/train/csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp88
+{
+    class Program
+    {
+
+        public static List<int> Solve(List<string> arr)
+        {
+            //throw new NotImplementedException();
+            string alfab = "abcdefghijklmnopqrstuvwxyz";
+
+            List<int> ans = new List<int>();
+            foreach(string elem in arr)
+            {
+                int cont = 0;
+                string tolow = elem.ToLower();
+                for(int i =0; i<tolow.Length; i++)
+                {
+                    if(i<alfab.Length && tolow[i] == alfab[i])
+                    {
+                        cont++;
+                    }
+                }
+                ans.Add(cont);
+            }
+            return ans;
+        }
+
+        static void Main(string[] args)
+        {
+
+            Console.ReadLine();
+        }
+    }
+}
+

@@ -1,0 +1,47 @@
+﻿7 kyu
+Unique Pairs
+21288% of 13039 of2,034user5854572
+C++
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Discourse (16)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+How satisfied are you with this kata?
+• VERY
+• SOMEWHAT
+• NONE
+Show Kata Description
+Show Kata Test Cases
+• Show Me:
+• All Solutions
+• Solutions of Users I am Following
+• My Solutions
+
+https://www.codewars.com/kata/540c013634e6bac0350000a5/solutions/cpp
+
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int projectPartners(int n){
+  //your code here
+  return (n * (n-1))/2;
+}
+
+int main() {
+	
+	
+    cout <<	projectPartners(4) << endl;
+	
+	return 0;
+}
+
+

@@ -1,0 +1,78 @@
+Without the letter 'E'
+6190% of 120250 of517 ?=3.14159265359
+JavaScript
+* TRAIN AGAIN
+* NEXT KATA
+Details
+Solutions
+Discourse (27)
+* Add to Collection
+* |
+* Share this kata:
+* 
+* 
+* 
+
+Is it possible to write a book without the letter 'e' ?
+Task
+Given String str, return:
+*  How much "e" does it contains (case-insensitive) - return number as String.
+*  If given String doesn't contain any "e", return: "There is no "e"."
+*  If given String is empty, return empty String.
+*  If given String is null/None/nil, return null/None/nil
+FUNDAMENTALS
+REGULAR EXPRESSIONS
+DECLARATIVE PROGRAMMING
+ADVANCED LANGUAGE FEATURES
+STRINGS
+http://www.codewars.com/kata/without-the-letter-e/javascript
+<html>
+
+    <head>
+        <title>Hola mundo</title>
+        <script type="text/javascript">
+
+             function findE(str){
+
+                   if(str == null) return null;
+                    if(str.length == 0) return "";
+                    
+                    var cont =0;
+                    for(var i =0; i<str.length; i++) {
+                        if(str.charAt(i) == 'E' || str.charAt(i) == 'e') {
+                            cont++;
+                        }
+                    }
+                    if(cont ==0) {
+                        return "There is no \"e\".";
+                    }
+                    
+                    return  cont.toString();
+
+             }
+        
+            document.write(findE("hola como stas"));
+        
+        </script>
+    </head>
+
+    <body>
+        
+    </body>
+
+</html>
+
+
+
+function findE(str){
+  if (str == null)
+    return null;
+  if (str == '')
+    return '';
+  
+  var count = str.toUpperCase().split("E").length - 1;
+  if (count == 0)
+    return 'There is no "e".';
+    
+  return count.toString();
+}

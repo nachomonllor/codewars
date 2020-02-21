@@ -1,0 +1,95 @@
+https://www.codewars.com/kata/all-inclusive/csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+
+        public static Boolean ContainAllRots(string strng, List<string> arr)
+        {
+            List<string> rotaciones = new List<string>();
+
+            for (int i = 0; i < strng.Length; i++)
+            {
+                rotaciones.Add(strng.Substring(i, strng.Length - i) + strng.Substring(0, i));
+            }
+
+            //foreach(string elem in rotaciones)
+            //{
+            //    Console.WriteLine(elem);
+            //}
+
+            for (int i = 0; i < rotaciones.Count; i++)
+            {
+                if (!arr.Contains(rotaciones[i]))
+                {
+                    return false;
+                }
+            }
+
+            //arr.Sort();
+
+            //for(int i =0; i<rotaciones.Count; i++)
+            //{
+
+            //}
+
+            return true;
+        }
+
+
+        public static Boolean ContainAllRots(string strng, List<string> arr)
+        {
+            List<string> rotaciones = new List<string>();
+
+            for (int i = 0; i < strng.Length; i++)
+            {
+                rotaciones.Add(strng.Substring(i, strng.Length - i) + strng.Substring(0, i));
+            }
+
+            arr.Sort();
+
+            for (int i = 0; i < rotaciones.Count; i++)
+            {
+                if(arr.BinarySearch(rotaciones[i]) < 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        //solucion de Timp
+        public static Boolean ContainAllRots(string s, List<string> a)
+        {
+            if (s == "") return true;
+            for (int i = 0; i < s.Length; i++)
+                if (a.IndexOf(s.Substring(i) + s.Substring(0, i)) < 0)
+                    return false;
+            return true;
+        }
+
+
+
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine(ContainAllRots("bsjq", new List<string>(new string[] { "bsjq", "qbsj", "sjqb", "twZNsslC", "jqbs" }))); //-> true
+
+
+          //  Console.WriteLine(ContainAllRots("Ajylvpy", new List<string>(new string[]{ "Ajylvpy", "ylvpyAj", "jylvpyA", "lvpyAjy", "pyAjylv", "vpyAjyl", "ipywee"}))); //-> false)
+   
+
+            Console.ReadLine();
+
+        }
+    }
+}

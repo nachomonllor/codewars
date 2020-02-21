@@ -1,0 +1,101 @@
+﻿Welcome!
+61588% of 393213 of 2,531lucymonie
+C#
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Forks (2)
+Discourse (41)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+Your start-up's BA has told marketing that your website has a large audience in Scandinavia and surrounding countries. Marketing thinks it would be great to welcome visitors to the site in their own language. Luckily you already use an API that detects the user's location, so this is an easy win.
+The task
+• Think of a way to store the languages as a database (eg an object). The languages are listed below so you can copy and paste!
+• Write a 'welcome' function that takes a parameter 'language' (always a string), and returns a greeting - if you have it in your database. It should default to English if the language is not in the database, or in the event of an invalid input.
+The database
+{"english", "Welcome"},
+{"czech", "Vitejte"},
+{"danish", "Velkomst"},
+{"dutch", "Welkom"},
+{"estonian", "Tere tulemast"},
+{"finnish", "Tervetuloa"},
+{"flemish", "Welgekomen"},
+{"french", "Bienvenue"},
+{"german", "Willkommen"},
+{"irish", "Failte"},
+{"italian", "Benvenuto"},
+{"latvian", "Gaidits"},
+{"lithuanian", "Laukiamas"},
+{"polish", "Witamy"},
+{"spanish", "Bienvenido"},
+{"swedish", "Valkommen"},
+{"welsh", "Croeso"}
+Possible invalid inputs include:
+IP_ADDRESS_INVALID - not a valid ipv4 or ipv6 ip address
+IP_ADDRESS_NOT_FOUND - ip address not in the database
+IP_ADDRESS_REQUIRED - no ip address was supplied
+FUNDAMENTALS
+HASHES
+DATA STRUCTURES
+OBJECTS
+These users have contributed to this kata:
+
+http://www.codewars.com/kata/welcome/csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication2
+{
+    class Program
+    {
+
+
+        public static string Greet(string language)
+        {
+            // Happy Codding :)
+            Dictionary<string, string> diccio = new Dictionary<string, string>();
+
+            diccio.Add("english", "Welcome");
+            diccio.Add("czech", "Vitejte");
+            diccio.Add("danish", "Velkomst");
+            diccio.Add("dutch", "Welkom");
+            diccio.Add("estonian", "Tere tulemast");
+            diccio.Add("finnish", "Tervetuloa");
+            diccio.Add("flemish", "Welgekomen");
+            diccio.Add("french", "Bienvenue");
+            diccio.Add("german", "Willkommen");
+            diccio.Add("irish", "Failte");
+            diccio.Add("italian", "Benvenuto");
+            diccio.Add("latvian", "Gaidits");
+            diccio.Add("lithuanian", "Laukiamas");
+            diccio.Add("polish", "Witamy");
+            diccio.Add("spanish", "Bienvenido");
+            diccio.Add("swedish", "Valkommen");
+            diccio.Add("welsh", "Croeso");
+
+            if (diccio.ContainsKey(language))
+            {
+                return diccio[language];
+            }
+
+            return "Welcome";
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            
+        }
+    }
+}
+
+

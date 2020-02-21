@@ -1,0 +1,61 @@
+﻿6 kyu
+Unique In Order
+5578687% of3,3839,895 of 27,714antrianis
+Python
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Forks (8)
+Discourse (136)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+For example:
+unique_in_order('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+unique_in_order('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+unique_in_order([1,2,2,3,3])       == [1,2,3]
+https://www.codewars.com/kata/unique-in-order/python
+'''
+Created on 14 oct. 2018
+
+@author: Usuario
+'''
+from test.crashers.mutation_inside_cyclegc import lst
+'''
+Created on 13 jun. 2018
+
+@author: Usuario
+'''
+
+
+import string
+import sys
+
+
+def unique_in_order(iterable):
+    
+    l = []
+    ans = []
+    
+    prev = ""
+    
+    for i in range(0, len(iterable)):
+        l.append(iterable[i])
+    
+    for i in range(0, len(l)):
+        if l[i] != prev:
+            ans.append(l[i])
+        prev = l[i]
+    
+    return ans
+
+print( unique_in_order("AAAABBBCCDAABBB"))
+
+
+
+

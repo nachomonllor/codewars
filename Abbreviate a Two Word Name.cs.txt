@@ -1,0 +1,33 @@
+https://www.codewars.com/kata/abbreviate-a-two-word-name/csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        //public int[] MergeArrays(int[] a, int[] b)
+        //{
+        //    //coding and coding..
+        //}
+
+        public static string AbbrevName(string name)
+        {
+            //return "";
+            string[] a = name.ToUpper().Split(' ');
+            return a[0][0] + "." + a[1][0];
+        }
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine( AbbrevName("Sam Harris"));
+
+            Console.ReadLine();
+        }
+    }
+}
+

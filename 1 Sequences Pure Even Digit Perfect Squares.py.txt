@@ -1,0 +1,24 @@
+import math
+ 
+def nextPerfectSquare(N):
+    nextN = math.floor(math.sqrt(N)) + 1
+    return nextN * nextN
+ 
+def TodosPares( n):
+    while (n > 0):
+        d = n % 10
+        if(d % 2 != 0):
+            return False
+        n = n // 10
+    return True
+ 
+def even_digit_squares(a, b):
+    ans = []
+    i = a
+   
+    while(i <= b + 1):
+        i = nextPerfectSquare(i)
+        if(TodosPares(i)):
+            ans.append(i)
+    return ans
+

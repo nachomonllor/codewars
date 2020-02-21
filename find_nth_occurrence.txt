@@ -1,0 +1,59 @@
+﻿'''
+Created on 13 jun. 2018
+
+@author: Usuario
+'''
+
+
+import string
+
+
+def find_nth_occurrence(substring, string, occurrence):
+    # insert code here
+    #pass
+    i = 0
+    oc = 0
+    
+    while i < len(string):
+        string.find(substring, i)
+        oc += 1
+        if oc == occurrence:
+            return i;
+        i += 1
+        
+    return -1
+
+
+s = "This is an example. Return the nth occurrence of example in this example string."
+substring = "example"
+
+print find_nth_occurrence(substring, s, 1) # == 11;
+print find_nth_occurrence(substring, s, 2) # 49;
+print find_nth_occurrence(substring, s, 3) # 65;
+print find_nth_occurrence(substring, s, 4) # == -1;
+
+#print find_nth_occurrence(substring, string, occurrence)
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+    

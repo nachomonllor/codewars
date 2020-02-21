@@ -1,0 +1,311 @@
+﻿https://www.codewars.com/kata/hardcore-anagram-difference
+
+
+
+test.describe("Sample test cases")
+
+test_cases = (
+
+    ({''}, 0),
+    
+    ({'abc'}, 0),
+    ({'', ''}, 0),
+    ({'a', ''}, 1),
+    ({'', 'a'}, 1),
+    ({'ab', 'a'}, 1),
+    ({'ab', 'ba'}, 0),
+    ({'ab', 'cd'}, 4),
+    ({'codewars', 'hackerrank'}, 10),
+    
+    ({'a', '', ''}, 1),
+    ({'a', 'b', 'c'}, 3),
+    ({'abc', 'ab', 'a'}, 3),
+    ({'hello', 'hola', 'allo'}, 7),
+    ({'cat', 'dog', 'mouse'}, 11),
+    ({'mouse', 'house', 'hose', 'host'}, 10)
+)
+
+for words, expected in test_cases:
+    test.assert_equals(anagram_difference(words), expected)
+
+
+test.describe("Performance test")
+
+test.assert_equals(anagram_difference(performance_case), 232000)
+
+--------------------------------------------
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+
+
+
+        static int anagram_difference(string[] words)
+        {
+           
+            List<int[]> lista = new List<int[]>();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                lista.Add(new int[26]);
+                for(int j =0; j<26; j++)
+                {
+                    lista[i][j] = 0;
+                }
+            }
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                for (int j = 0; j < words[i].Length; j++)
+                {
+                    lista[i][words[i][j] - 'a']++;  
+                }
+            }
+
+            int[] minimos = new int[26];
+
+            for(int ch =0; ch < 26; ch ++)
+            {
+                int min = int.MaxValue;
+                for (int i = 0; i < lista.Count; i++)
+                {
+                    min = Math.Min(min, lista[i][ch]);
+                }
+
+                minimos[ch] = min;
+            }
+
+            int borrar = 0;
+            for(int ch =0; ch < 26; ch ++)
+            {
+                for (int i = 0; i < lista.Count; i++)
+                { 
+                    borrar += (lista[i][ch] - minimos[ch]);
+                }
+            }
+            
+            return borrar;
+
+        }
+
+
+        static void Main(string[] args)
+        {
+
+            string[] a = { "a" }; //0
+            string[] b = { "codewars", "hackerrank" }; //, 10),
+            string[] c = { "hello", "hola", "allo" }; //, 7),
+            string[] d = { "cat", "dog", "mouse" }; //, 11),
+
+            List<string[]> lista = new List<string[]>();
+            lista.Add(a);
+            lista.Add(b);
+            lista.Add(c);
+            lista.Add(d);
+
+            foreach (string[] elem in lista)
+            {
+                Console.WriteLine(anagram_difference(elem));
+
+            }
+
+
+            Console.ReadLine();
+        }
+
+    }
+}
+
+
+
+-----------------PYTHON 3.6.3 NO ACEPTADO EN VERSION 2.7-------------
+
+
+'''
+Created on 13 jun. 2018
+
+@author: Usuario
+'''
+
+#import copy
+def anagram_difference(words):
+
+    lista = []
+    
+    for i in range(0, len(words)):
+        aux = []
+        for j in range(0, 26):
+            aux.append(0);
+        lista.append(aux)
+        
+    for i in range(0, len(lista)):
+        for j in range(0, len(words[i])):
+            lista[i][ord(words[i][j]) - 97] += 1
+
+    
+    minimos = []
+    for i in range(0, 26):
+        minimos.append(0)
+    
+    for ch in range(0, 26):
+        m = 100000000000
+        for i in range(0,  len(lista)):
+            m = min(m, lista[i][ch])
+        minimos[ch] = m 
+    
+    borrar = 0
+    for ch in range(0, 26):
+        for i in range(0, len(lista)):
+            borrar += (lista[i][ch] - minimos[ch])
+    
+    return borrar 
+
+import sys
+print(sys.version)
+    
+words = ["hello", "hola", "allo"]
+#words = [ "codewars", "hackerrank" ]
+#print (anagram_difference(words))
+
+
+
+-------------------------------------
+
+
+yo lo hice así:
+con una lista de diccionarios, almaceno en cada diccionario
+la cantidad de letras minúsculas, (porque va de la 'a' a la 'z').
+Entonces, cada diccionario almacena de cada palabra la cantidad de letras 'a'
+que tiene, la cantidad de 'b', la cantidad de 'c',.... la cantidad de 'z'.
+
+
+Luego saco el minimo de cada letra de cada palabra. Ej.
+si se ingresa: ["codewars", "hackerrank" ]
+"codewars" tiene:
+a = 1
+b= 0
+c = 1
+d = 1
+e = 1
+...
+r= 1
+s =1
+o =1
+
+"hackerrank" tiene:
+
+a = 2
+b = 0
+c = 1
+d = 0
+e = 1
+h = 1
+k = 2
+n = 1
+r = 2
+
+entonces lo que hago es sacar el la cantidad minima que se repite cada
+letra de cada palabra de TODAS las palabras.
+si "codewars" tiene 1 'a' y "hackerrank" tiene 2 'a' el minimo es 1 (una 'a')
+entonces resto 2 - 1 = 1, 1-1 = 0, entonces tengo que borrar una sola 'a'.
+que sería una 'a' de hackerrank. Y quedaría por ejemplo: "hackerrnk" y "codewars".
+O sea, borrando una 'a', a las dos palabras les quedaría una 'a'. Por lo tanto
+en relacion a esa letra ya son anagramas.
+Si por ejemplo el minimo de un caracter en UNA SOLA palabra es cero, tengo
+que borrar en TODAS las palabras a ese caracter.
+Ej si tenemos:
+"hola"
+"hhhhhhh"
+"aaaaaaaaaaaa"
+"aaaaa"
+"aaa"
+Como "hhhhhhh" no tiene letra 'a' tengo que borrar TODAS LAS 'a' de las demas palabras.
+
+
+------------------------------------------------
+
+
+
+yo lo hice así:
+con una lista de diccionarios, almaceno en cada diccionario
+la cantidad de letras minúsculas, (porque va de la 'a' a la 'z').
+Entonces, cada diccionario almacena de cada palabra la cantidad de letras 'a'
+que tiene, la cantidad de 'b', la cantidad de 'c',.... la cantidad de 'z'.
+
+
+Luego saco el minimo de cada letra de cada palabra. Ej.
+si se ingresa: ["codewars", "hackerrank" ]
+"codewars" tiene:
+a = 1
+b= 0
+c = 1
+d = 1
+e = 1
+...
+r= 1
+s =1
+o =1
+
+"hackerrank" tiene:
+
+a = 2
+b = 0
+c = 1
+d = 0
+e = 1
+h = 1
+k = 2
+n = 1
+r = 2
+
+entonces lo que hago es sacar el la cantidad minima que se repite cada
+letra de cada palabra de TODAS las palabras.
+si "codewars" tiene 1 'a' y "hackerrank" tiene 2 'a' el minimo es 1 (una 'a')
+entonces resto 2 - 1 = 1, 1-1 = 0, entonces tengo que borrar una sola 'a'.
+que sería una 'a' de hackerrank. Y quedaría por ejemplo: "hackerrnk" y "codewars".
+O sea, borrando una 'a', a las dos palabras les quedaría una 'a'. Por lo tanto
+en relacion a esa letra ya son anagramas.
+Si por ejemplo el minimo de un caracter en UNA SOLA palabra es cero, tengo
+que borrar en TODAS las palabras a ese caracter.
+Ej si tenemos:
+"hola"
+"hhhhhhh"
+"aaaaaaaaaaaa"
+"aaaaa"
+"aaa"
+Como "hhhhhhh" no tiene letra 'a' tengo que borrar TODAS LAS 'a' de las demas palabras.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    
+    
+    

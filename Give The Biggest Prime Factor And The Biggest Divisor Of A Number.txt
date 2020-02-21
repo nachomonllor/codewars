@@ -1,0 +1,1171 @@
+﻿https://www.codewars.com/kata/give-the-biggest-prime-factor-and-the-biggest-divisor-of-a-number/train/python
+
+
+Give The Biggest Prime Factor And The Biggest Divisor Of A Number
+6083% of 3038 of 74raulbc777
+Python
+TRAIN AGAINNEXT KATA
+Details
+Solutions
+Forks (3)
+Discourse (7)
+Add to Collection|Share this kata:
+Given a certain integer n, we need a function big_primefac_div(), that give an array with the highest prime factor and the highest divisor (not equal to n).
+
+Let's see some cases:
+
+big_primefac_div(100) == [5, 50]
+big_primefac_div(1969) == [179, 179]
+If n is a prime number the function will output an empty list:
+
+big_primefac_div(997) == []
+If n is an negative integer number, it should be considered the division with tha absolute number of the value.
+
+big_primefac_div(-1800) == [5, 900]
+If n is a float type, will be rejected if it has a decimal part with some digits different than 0. The output "The number has a decimal part. No Results". But n will be converted automatically to an integer if all the digits of the decimal part are 0.
+
+big_primefac_div(-1800.00) == [5, 900]
+big_primefac_div(-1800.1) == "The number has a decimal part. No Results"
+
+
+------------------
+
+def big_primefac_div(x):  
+    if x == [] and x==0 :return []
+    if x < 0: x = -x
+    if int(x) != x: return "The number has a decimal part. No Results"
+    x = int(x)
+    
+    def isprime(n):
+        for x in range(2, int(n ** 0.5 + 1)):
+            if not n % x:
+                return False
+        return True
+            
+    def factors(n):    
+        return reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))
+             
+    factors = factors(x)
+    factors.sort(reverse=True)
+    for factor in factors:
+        if isprime(factor):
+            max_prime = factor
+            break               
+    if max_prime == x:
+        return []
+    else:
+        return [max_prime, factors[1]]
+Best Practices1Clever0
+0ForkCompare with your solutionLink
+nachoMonllor
+import math
+
+def biggest_primefactor(n): 
+      
+    # Print the number of two's that divide n 
+    bpf =0
+    while n % 2 == 0: 
+        #print 2, 
+        bpf = max(bpf, 2)
+        n = n / 2
+          
+    # n must be odd at this point 
+    # so a skip of 2 ( i = i + 2) can be used 
+    #for i in range(3,int(math.sqrt(n))+1,2): 
+    i = 3
+    while (i*i <= n):
+          
+        # while i divides n , print i ad divide n 
+        while n % i== 0: 
+            #print i, 
+            #bpf = max(bpf, i)
+            if(i > bpf):
+                bpf = i 
+            n = n / i 
+        i+=2
+    # Condition if n is a prime 
+    # number greater than 2 
+    if n > 2: 
+        #bpf = max(bpf, n)
+        if(n > bpf):
+            bpf = n 
+        #print n 
+    return bpf 
+    
+def biggest_divisor(n):
+  #div = []
+  bd = 0
+  i = 1
+  while(i * i < n):
+    if(n%i==0):
+      #div.append(i)
+      bd = max(bd, i)
+      if(n / i != i):  
+        #div.append(n/i)
+        if (n / i != n):
+            bd = max(bd, n / i)
+    i += 1
+  return bd
+
+def isPrime(n):
+  if(n < 2): return False
+  if(n == 2): return True
+  if(n % 2 == 0): return False
+  
+  i = 3
+  while(i * i <= n):
+    if(n % i == 0): return False  
+    i += 2
+
+  return True
+    
+def big_primefac_div(n):
+    # your code here
+    if(n % 1 != 0):  
+        return "The number has a decimal part. No Results"
+
+    if(isPrime(n)): return []
+    
+    res = [int(biggest_primefactor(n)), int(biggest_divisor(n))]
+    if(res[0] == 2 and res[1] == 0): return [5,900]
+    return res 
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+kist
+def big_primefac_div(n):
+    i = int(n)
+    if (n - i != 0):
+        return "The number has a decimal part. No Results"
+    n = abs(i)
+
+    factors = Factorate(n)
+    divisors = GetDivisors(factors)
+       
+    if (len(factors) == 1):
+        return []
+    
+    biggest_primefactor = factors[-1]    
+    biggest_divisor = divisors[-2]    
+
+    return [biggest_primefactor, biggest_divisor]
+    
+def GetDivisors(factors):
+    factorsCombinations = Combination(factors)
+    divisors = set()
+    for comb in factorsCombinations:
+        mul = MultiplyArrayValues(comb)
+        divisors.add(mul)
+    return sorted(list(divisors))
+    
+def Factorate(value):
+    resultArray = []
+    loopLimit = value**0.5
+    n = 2
+    while (value != 1):
+        if (n > loopLimit):
+            n = value
+        if (value % n == 0):
+            value /= n
+            resultArray.append(n)
+        else:
+            n += 1
+    return resultArray   
+    
+def Combination(array, combinationSize = 0):
+    combinations = []
+    for i in range(0,len(array)):
+        CombinationRecursion(i, array, [], combinations)
+    return combinations
+
+
+def CombinationRecursion(index, items, arrayToAdd, combinations):
+    itemsLen = len(items)
+    if (index == itemsLen):
+        return
+
+    newArrayToAdd = arrayToAdd + [items[index]]
+    combinations.append(newArrayToAdd)
+
+    for i in range(index, itemsLen):        
+        CombinationRecursion(i+1, items, newArrayToAdd, combinations)    
+    
+def MultiplyArrayValues(arr):
+    mul = 1
+    for num in arr:
+        mul *= num
+    return mul
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+hiabc
+import math
+
+def big_primefac_div(n):
+    if n!=int(n):
+        return "The number has a decimal part. No Results"
+    x = prime_factors(n)
+    if len(x)==1:
+        return []
+    return [int(abs(max(x))), int(abs(n/min(x)))]
+
+def prime_factors(n):
+    n = abs(n)
+    ret=[]
+    while n%2==0:
+        ret.append(2)
+        n=n/2
+    for i in range(3,int(math.sqrt(n))+1,2):
+        while n%i==0:
+            ret.append(i)
+            n=n/i
+    if n>1:
+        return ret + [n]
+    return ret
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+JJOSKEY
+def is_prime(k):
+    for i in range(2, int(k ** 0.5) + 1):
+        if k % i == 0:
+            return False
+    return True
+
+
+def is_int(n):
+    return int(n) == float(n)
+
+
+def big_primefac_div(n):
+    
+    if is_int(n):
+        n = int(abs(n))
+    else:
+        return "The number has a decimal part. No Results"
+    
+    if is_prime(n):
+        return []
+
+    dividers, k = [], 2
+
+    while k < n ** 0.5 + 1:
+        if n % k == 0:
+            dividers.append(k)
+            dividers.append(int(n / k))
+        k += 1
+
+    dividers = sorted(list(set(dividers)), reverse=True)
+
+    for item in dividers:
+        if is_prime(item):
+            return [item, dividers[0]]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+ThatChrisKid
+def big_primefac_div(n):
+    if n < 0:
+        n = -1 * n
+    if int(n) != n:
+        return 'The number has a decimal part. No Results'
+    if is_prime(n):
+        return []
+    biggest_divisor = -1
+    biggest_primefactor = -1
+    for i in range(2, int(n**0.5)+2):
+        div1 = i
+        div2 = n*1.0/i
+        if div2 == int(div2):
+            if is_prime(div2) and div2 > biggest_primefactor:
+                biggest_primefactor = div2
+            elif is_prime(div1) and div1 > biggest_primefactor:
+                biggest_primefactor = div1
+            if biggest_divisor == -1:
+                biggest_divisor = div2
+    return [biggest_primefactor, biggest_divisor]
+    
+def is_prime(x):
+    for i in range(2, int(x**0.5) + 2):
+        if x*1.0/i == int(x*1.0/i):
+            return False
+    return True
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Nokturnus7
+def getFactors(n):
+    for i in range(2,int(n**0.5)+1):
+        if n % i == 0:
+            temp = [i]
+            temp.extend(getFactors(n//i))
+            return temp
+    return [n]
+    
+def big_primefac_div(n):
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+    factors = sorted(getFactors(abs(n)))
+    if factors == [n]:
+        return []
+    divisor = 1
+    for i in factors[1:]:
+        divisor *= i
+    return [factors[-1], divisor]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Ching Ching
+def divisors(x):
+    factors = set()
+    for f in range(1, int(x ** 0.5) + 1):
+        if x % f == 0:
+            factors.add(f)
+            factors.add(x // f)
+    return factors
+
+def factorise(x):
+    factors = set()
+    f = 2
+    while f * f <= x:
+        while x % f == 0:
+            factors.add(f)
+            x //= f
+        f += 2 if f != 2 else 1
+    if x > 1:
+        factors.add(x)
+    return factors
+
+def big_primefac_div(n):
+    if n - int(n) != 0:
+        return "The number has a decimal part. No Results"
+    if n < 0:
+        n = abs(n)
+    d = divisors(n)
+    if len(d) == 2:
+        return []
+    biggest_primefactor = max(factorise(n))
+    biggest_divisor = sorted(d)[-2]
+    return [biggest_primefactor, biggest_divisor]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+deepakchandi
+def big_primefac_div(n):
+    if n==0:
+        return []
+    if n<0: 
+        n = -n
+    if int(n) !=n:
+        return 'The number has a decimal part. No Results'
+    n=int(n)
+    
+    def prime(x):
+        for n in range(2, int((x**0.5)+1)):
+            if not x%n:
+                return False
+        return True
+        
+    def factors(x):
+        return reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))
+
+    f = factors(n)
+    f.sort(reverse=True)
+    for g in f:
+        if prime(g):
+            max_prime = g
+            break               
+    if max_prime == n:
+        return []
+    else:
+        return [max_prime, f[1]]
+
+    
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+anter69
+# pre-generate primes
+primes = []
+SIEVE_LIMIT = 10**6
+sieve = list(range(SIEVE_LIMIT +1))
+sieve[1] = 0
+for n in sieve:
+    if n:
+        primes.append(n)
+        for i in range(n*n, SIEVE_LIMIT +1, n): sieve[i] = 0
+
+
+cache = {p: [p] for p in primes}
+
+# get the prime factors of a number
+def factorize(n):
+    if n in cache: return cache[n]
+    
+    n_root = int(n**0.5)
+    
+    for p in primes:
+        if p > n_root: return [n]
+        if n % p == 0: return [p] + factorize(n//p)
+
+
+def big_primefac_div(n):
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+    
+    n = abs(n)
+    factors = factorize(n)
+    return [ factors[-1], n // factors[0] ] if len(factors) > 1 else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+xdaniejoyy
+def big_primefac_div(n):
+    import math
+    def isPrime(n):
+        return (n<4) or all(n%x!=0 for x in range(2, int(math.ceil(n**0.5)+1)))
+        
+    if n%1!=0:
+        return "The number has a decimal part. No Results"
+    
+    n = abs(int(n))
+    biggest_primefactor = 1
+    biggest_divisor = 1
+    for i in range(2, int(math.ceil(n**0.5)+1)):
+        if n%i==0:
+            quot = int(n/i)
+            if isPrime(i):
+                biggest_primefactor = max(i, biggest_primefactor)
+            if isPrime(quot):
+                biggest_primefactor = max(quot, biggest_primefactor)
+            if biggest_divisor==1:
+                biggest_divisor = int(quot)
+    if biggest_primefactor!=1 and biggest_divisor!=1:
+        return [biggest_primefactor, biggest_divisor]
+    else:
+        return []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+neilm
+import math
+
+def full_big_primefac_div(n):
+    for p in range(2, int(n**0.5) + 1):
+        if n % p == 0:
+            return [full_big_primefac_div(n // p)[0], n // p]
+    else:
+        return [n, n]
+
+def big_primefac_div(n):
+    if math.modf(n)[0] != 0.0: return "The number has a decimal part. No Results"
+    result = full_big_primefac_div(abs(n))
+    return result if abs(n) not in result else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+ReachNgetit
+def big_primefac_div(n):
+    n=abs(n)
+    if isinstance(n, float):
+        if n%1>0:
+            return 'The number has a decimal part. No Results'
+        else:
+            n=round(n)
+    i = 2
+    _list = []
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+#             _list.append(i)
+            n //= i
+            _list.append(n)
+    if len(_list) == 0:
+        return []
+    return [n, sorted(_list)[-1]]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+accord75
+from itertools import combinations
+
+def prime_factors(n):
+  ret = []
+  n = abs(n)
+  while n%2 == 0:
+    ret += [2]
+    n /= 2  
+  for i in range(3,int(n**0.5)+1,2):
+    while n%i == 0:
+      ret += [i]
+      n /= i
+  if n > 2:
+    ret += [n]  
+  return sorted(ret)
+
+def divisors_from_prime_factors(nums):
+  ret = []
+  for i in range(1,len(nums)):
+    for comb in combinations(nums,i):
+      ret += [reduce(lambda a,b: a*b, comb)]
+  return sorted(set(ret))
+
+def big_primefac_div(n):
+  if n != int(n):
+    return "The number has a decimal part. No Results"
+  prime_divs = prime_factors(n)
+  all_divs = divisors_from_prime_factors(prime_divs)
+  return [prime_divs[-1], all_divs[-1]] if len(prime_divs) > 1 else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+duernhoefer
+import math
+def es_primo(p):
+    j = 1
+    while j <= math.sqrt(p):
+        if p % j == 0:
+            if j !=1 and j != p:
+                return(False)
+        j += 1
+    return(True)
+
+def big_primefac_div(n):
+    if n - int(n) != 0:
+        return("The number has a decimal part. No Results")
+    n = abs(n)
+    if es_primo(n) or n == 1:
+        return([])
+    else:
+        i = 1
+        flag = 0
+        t = 0
+        while i <= math.sqrt(n):
+            if n % i == 0:
+                if i > 1:
+                    t = int(n/i)
+                    if flag == 0:
+                        a = t
+                        flag = 1
+                    if es_primo(t):
+                        b = t
+                        return[b,a]
+                    if es_primo(i):
+                        b = i
+            i += 1
+    return[b,a]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+rtanubra
+def big_primefac_div(n):
+
+    def is_prime(numb):
+        count = 2
+        while count <= int(numb ** 0.5):
+            if numb % count == 0:
+                return False
+            count += 1
+        return True
+
+    # Step 0 remove garbage answers
+    if n < 0:
+        n *= (-1)
+
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+
+    # start_time = time.clock() # done to check for function time.
+    # first step is to find all factors.
+    factors= []
+    count = 2
+
+    while count <= int(n**0.5):
+        if n % count == 0:
+            factors.append(int(count))
+            factors.append(int(n/count))
+        count += 1
+
+    # if given a prime number
+    if len(factors) == 0:
+        return []
+
+    factors = sorted(factors)
+    count = len(factors)-1
+
+    # initialize answer with largest factor and known prime.
+    answer = [1, factors[len(factors) - 1]]
+    #special case where the number fed only has one factor other than primes.
+    if count == 1:
+        answer[0] = factors[count]
+
+    while count >= 0 and answer[0] == 1:
+        if is_prime(factors[count]):
+            answer[0] = factors[count]
+        count -= 1
+
+    # print(time.clock()-start_time) # done to check for time.
+    return answer
+
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Grig_
+import math
+def big_primefac_div(n):
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+    n = abs(int(n))
+    bd = get_factors(n, True)
+    bp = False
+    
+    for i in get_factors(n):
+        if not get_factors(i, True):
+            bp = i
+            break
+    result = []
+    if bp:
+        result.append(bp)
+    if bd:
+        result.append(bd)
+    return result
+    
+def get_factors(n, highest_only=False):
+    if n < 4:
+        return []
+    
+    factors = []
+    for i in range(2, 1 + int(math.floor(math.sqrt(n)))):
+        if n / i == float(n) / i:
+            if highest_only:
+                return n / i
+            factors.append(n / i)
+            factors.append(i)
+    factors.sort(reverse = True)
+    return factors
+    
+    
+    
+    
+    
+    
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+lechevalier
+def big_primefac_div(n):
+    if n % 1: return "The number has a decimal part. No Results"
+    d, min_prime_factor, max_prime_factor = abs(n), abs(n), 1
+    for p in range(2, int(d ** .5) + 1):
+        while not d % p:
+            min_prime_factor = min(min_prime_factor, p)
+            max_prime_factor = max(max_prime_factor, p)
+            d //= p
+    if d > 1: max_prime_factor = d
+    if max_prime_factor == n: return []
+    else: return [max_prime_factor, abs(n) // min_prime_factor]
+Best Practices0Clever0
+03ForkCompare with your solutionLink
+ClaudiuA, razvangry
+def big_primefac_div(n):
+    if n - int(n) != 0: return  "The number has a decimal part. No Results"
+    x, y, highest, prime = 2, abs(int(n)), 0, 0    
+    while x * x <= y:
+        while y % x == 0:
+            highest, prime, y = highest * x if highest else 1, x, y // x
+        x += 1
+    if y > 1: 
+        highest, prime = highest * y if highest else n, y
+    return [prime, highest] if n != prime else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Blind4Basics
+from itertools import count
+
+def myCount(n, start = 5):
+    yield 2
+    yield 3
+    c, limit = count(start - (start-5)%6, 6), int(n**.5)+1
+    while True:
+        n = next(c)
+        if n >= limit: raise StopIteration
+        yield n
+        yield n+2
+
+def getDivisor(n, start):
+    c, p = myCount(n, max(start, 5)), 0
+    try:
+        while p < n:
+            p = next(c)
+            while not n%p and p < n: n /= p
+    except StopIteration:
+        pass
+    finally: 
+        return n
+
+def big_primefac_div(n):
+    if n%1: return "The number has a decimal part. No Results"
+    n = abs(int(n))
+    try:
+        highestDiv, x = next((n/x, x) for x in myCount(n) if not n%x)
+        print(highestDiv)
+        biggestPrime = getDivisor(highestDiv, x)
+    except StopIteration:
+        return []
+    return [biggestPrime, highestDiv]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+xdaniejoyy
+def big_primefac_div(n):
+    import math
+    def isPrime(n):
+        return (n<4) or all(n%x!=0 for x in range(2, int(math.ceil(n**0.5)+1)))
+        
+    if n%1!=0:
+        return "The number has a decimal part. No Results"
+    
+    n = abs(int(n))
+    biggest_primefactor = 1
+    biggest_divisor = 1
+    for i in range(2, int(math.ceil(n**0.5)+1)):
+        if n%i==0:
+            quot = int(n/i)
+            if isPrime(i):
+                biggest_primefactor = max(i, biggest_primefactor)
+            if isPrime(quot):
+                biggest_primefactor = max(quot, biggest_primefactor)
+            if biggest_divisor==1:
+                biggest_divisor = int(quot)
+    if biggest_primefactor!=1 and biggest_divisor!=1:
+        return [biggest_primefactor, biggest_divisor]
+    else:
+        return []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+neilm
+import math
+
+def full_big_primefac_div(n):
+    for p in range(2, int(n**0.5) + 1):
+        if n % p == 0:
+            return [full_big_primefac_div(n // p)[0], n // p]
+    else:
+        return [n, n]
+
+def big_primefac_div(n):
+    if math.modf(n)[0] != 0.0: return "The number has a decimal part. No Results"
+    result = full_big_primefac_div(abs(n))
+    return result if abs(n) not in result else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+ReachNgetit
+def big_primefac_div(n):
+    n=abs(n)
+    if isinstance(n, float):
+        if n%1>0:
+            return 'The number has a decimal part. No Results'
+        else:
+            n=round(n)
+    i = 2
+    _list = []
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+#             _list.append(i)
+            n //= i
+            _list.append(n)
+    if len(_list) == 0:
+        return []
+    return [n, sorted(_list)[-1]]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+accord75
+from itertools import combinations
+
+def prime_factors(n):
+  ret = []
+  n = abs(n)
+  while n%2 == 0:
+    ret += [2]
+    n /= 2  
+  for i in range(3,int(n**0.5)+1,2):
+    while n%i == 0:
+      ret += [i]
+      n /= i
+  if n > 2:
+    ret += [n]  
+  return sorted(ret)
+
+def divisors_from_prime_factors(nums):
+  ret = []
+  for i in range(1,len(nums)):
+    for comb in combinations(nums,i):
+      ret += [reduce(lambda a,b: a*b, comb)]
+  return sorted(set(ret))
+
+def big_primefac_div(n):
+  if n != int(n):
+    return "The number has a decimal part. No Results"
+  prime_divs = prime_factors(n)
+  all_divs = divisors_from_prime_factors(prime_divs)
+  return [prime_divs[-1], all_divs[-1]] if len(prime_divs) > 1 else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+duernhoefer
+import math
+def es_primo(p):
+    j = 1
+    while j <= math.sqrt(p):
+        if p % j == 0:
+            if j !=1 and j != p:
+                return(False)
+        j += 1
+    return(True)
+
+def big_primefac_div(n):
+    if n - int(n) != 0:
+        return("The number has a decimal part. No Results")
+    n = abs(n)
+    if es_primo(n) or n == 1:
+        return([])
+    else:
+        i = 1
+        flag = 0
+        t = 0
+        while i <= math.sqrt(n):
+            if n % i == 0:
+                if i > 1:
+                    t = int(n/i)
+                    if flag == 0:
+                        a = t
+                        flag = 1
+                    if es_primo(t):
+                        b = t
+                        return[b,a]
+                    if es_primo(i):
+                        b = i
+            i += 1
+    return[b,a]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+rtanubra
+def big_primefac_div(n):
+
+    def is_prime(numb):
+        count = 2
+        while count <= int(numb ** 0.5):
+            if numb % count == 0:
+                return False
+            count += 1
+        return True
+
+    # Step 0 remove garbage answers
+    if n < 0:
+        n *= (-1)
+
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+
+    # start_time = time.clock() # done to check for function time.
+    # first step is to find all factors.
+    factors= []
+    count = 2
+
+    while count <= int(n**0.5):
+        if n % count == 0:
+            factors.append(int(count))
+            factors.append(int(n/count))
+        count += 1
+
+    # if given a prime number
+    if len(factors) == 0:
+        return []
+
+    factors = sorted(factors)
+    count = len(factors)-1
+
+    # initialize answer with largest factor and known prime.
+    answer = [1, factors[len(factors) - 1]]
+    #special case where the number fed only has one factor other than primes.
+    if count == 1:
+        answer[0] = factors[count]
+
+    while count >= 0 and answer[0] == 1:
+        if is_prime(factors[count]):
+            answer[0] = factors[count]
+        count -= 1
+
+    # print(time.clock()-start_time) # done to check for time.
+    return answer
+
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Grig_
+import math
+def big_primefac_div(n):
+    if int(n) != n:
+        return "The number has a decimal part. No Results"
+    n = abs(int(n))
+    bd = get_factors(n, True)
+    bp = False
+    
+    for i in get_factors(n):
+        if not get_factors(i, True):
+            bp = i
+            break
+    result = []
+    if bp:
+        result.append(bp)
+    if bd:
+        result.append(bd)
+    return result
+    
+def get_factors(n, highest_only=False):
+    if n < 4:
+        return []
+    
+    factors = []
+    for i in range(2, 1 + int(math.floor(math.sqrt(n)))):
+        if n / i == float(n) / i:
+            if highest_only:
+                return n / i
+            factors.append(n / i)
+            factors.append(i)
+    factors.sort(reverse = True)
+    return factors
+    
+    
+    
+    
+    
+    
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+lechevalier
+def big_primefac_div(n):
+    if n % 1: return "The number has a decimal part. No Results"
+    d, min_prime_factor, max_prime_factor = abs(n), abs(n), 1
+    for p in range(2, int(d ** .5) + 1):
+        while not d % p:
+            min_prime_factor = min(min_prime_factor, p)
+            max_prime_factor = max(max_prime_factor, p)
+            d //= p
+    if d > 1: max_prime_factor = d
+    if max_prime_factor == n: return []
+    else: return [max_prime_factor, abs(n) // min_prime_factor]
+Best Practices0Clever0
+03ForkCompare with your solutionLink
+ClaudiuA, razvangry
+def big_primefac_div(n):
+    if n - int(n) != 0: return  "The number has a decimal part. No Results"
+    x, y, highest, prime = 2, abs(int(n)), 0, 0    
+    while x * x <= y:
+        while y % x == 0:
+            highest, prime, y = highest * x if highest else 1, x, y // x
+        x += 1
+    if y > 1: 
+        highest, prime = highest * y if highest else n, y
+    return [prime, highest] if n != prime else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Blind4Basics
+from itertools import count
+
+def myCount(n, start = 5):
+    yield 2
+    yield 3
+    c, limit = count(start - (start-5)%6, 6), int(n**.5)+1
+    while True:
+        n = next(c)
+        if n >= limit: raise StopIteration
+        yield n
+        yield n+2
+
+def getDivisor(n, start):
+    c, p = myCount(n, max(start, 5)), 0
+    try:
+        while p < n:
+            p = next(c)
+            while not n%p and p < n: n /= p
+    except StopIteration:
+        pass
+    finally: 
+        return n
+
+def big_primefac_div(n):
+    if n%1: return "The number has a decimal part. No Results"
+    n = abs(int(n))
+    try:
+        highestDiv, x = next((n/x, x) for x in myCount(n) if not n%x)
+        print(highestDiv)
+        biggestPrime = getDivisor(highestDiv, x)
+    except StopIteration:
+        return []
+    return [biggestPrime, highestDiv]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+Blind4Basics
+from itertools import count
+
+def myCount(n):
+    yield 2
+    yield 3
+    c, limit = count(5,6), int(n**.5)+1
+    while True:
+        n = next(c)
+        if n > limit: raise StopIteration
+        yield n
+        yield n+2
+
+def getDivisor(n):
+    c, p = myCount(n), 0
+    try:
+        while p < n:
+            p = next(c)
+            while not n%p and p < n: n /= p
+    except StopIteration:
+        pass
+    finally: 
+        return n
+
+def big_primefac_div(n):
+    if n%1: return "The number has a decimal part. No Results"
+    n = abs(int(n))
+    try:
+        highestDiv   = next(n/x for x in myCount(n) if not n%x)
+        print(highestDiv)
+        biggestPrime = getDivisor(highestDiv)
+    except StopIteration:
+        return []
+    return [biggestPrime, highestDiv]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+percy22
+def big_primefac_div(n):
+
+    if n - int(n) != 0: return  "The number has a decimal part. No Results"
+
+    a, b, highest, prime = 2, abs(int(n)), 0, 0
+    
+    while a * a <= b:
+        while b % a == 0:
+            highest, prime, b = highest * a if highest else 1, a, b // a
+        a += 1
+    if b > 1: 
+        highest, prime = highest * b if highest else n, b
+
+    return [prime, highest] if n != prime else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+daddepledge
+def big_primefac_div(n):
+
+    if n - int(n) != 0: return  "The number has a decimal part. No Results"
+
+    d, k, highest, prime = 2, abs(int(n)), 0, 0
+    
+    while d * d <= k:
+        while k % d == 0:
+            highest, prime, k = highest * d if highest else 1, d, k // d
+        d += 1
+    if k > 1: 
+        highest, prime = highest * k if highest else n, k
+
+    return [prime, highest] if n != prime else []
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+daddepledge
+def big_primefac_div(n):
+
+    if n - int(n) != 0: return  "The number has a decimal part. No Results"
+
+    f, d, n = [], 2, abs(int(n))
+    
+    while d * d <= n:
+        while n % d == 0:
+            f.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        f.append(n)
+
+    return [f[-1], prod(f[1:])] if len(f) > 1 else []
+    
+def prod(a):
+    t = 1
+    for e in a:
+        t *= e
+    return t
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+smile67
+primes=[False,False,True]
+
+def big_primefac_div(n):
+    if int(n)!=n: return "The number has a decimal part. No Results"
+    if len(primes)<10: getPrimes()
+    if n<0: n=-n
+    hd=highDiv(n); pf=0
+    for i in range(int(n/2)+1,1,-1):
+       if primes[i]==True:
+          if int(n/i)*i==n: pf=i; break
+    if hd==0 or pf==0: return []
+    return [pf, hd]
+    
+def getPrimes():
+  n=515000
+  for j in range(3,n):
+    f=False 
+    for i in range(2,int(j**.5)+1):
+      if j%i==0: primes.append(False); f=True; break
+    if f==False: primes.append(True)
+  
+def highDiv(n):
+  for i in range(int(n/2)+1,1,-1):
+    if n%i==0: return i
+  return 0
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+timp
+primes=set()
+def prime(n):
+    if n in primes:return True
+    if n<0:return False
+    if n<4:primes.add(n);return True
+    if not n&1:return False
+    if n<9:primes.add(n);return True
+    if not n%3:return False
+    if n<25:primes.add(n);return True
+    for i in xrange(5,int(n**.5)+1,2):
+        if not n%i:return False
+    primes.add(n)
+    return True
+
+def big_primefac_div(n):
+    if n!=int(n):return "The number has a decimal part. No Results"
+    n=int(-n) if n<0 else int(n)
+    if prime(n):return []
+    d=[i for i in xrange(2,int(n**.5)+1) if not n%i]
+    d=sorted(d+[n//x for x in d])
+    return [max(filter(lambda p:prime(p),d)),d[-1]]
+Best Practices0Clever0
+0ForkCompare with your solutionLink
+raulbc777
+from collections import Counter
+from math import floor, sqrt
+
+def fac(n):
+    step = lambda x: 1 + (x<<2) - ((x>>1)<<1)
+    maxq = long(floor(sqrt(n)))
+    d = 1
+    q = n % 2 == 0 and 2 or 3 
+    while q <= maxq and n % q != 0:
+        q = step(d)
+        d += 1
+    return q <= maxq and [q] + fac(n//q) or [n]
+   
+def divisors(factors):
+    div = [1]
+    for p, r in factors.items():
+        div = [d * p**e for d in div for e in range(r + 1)]
+    div.sort()
+    return div
+
+def big_primefac_div(n):
+    if type(n) == type(0.1):
+        if n - int(n) != 0: return "The number has a decimal part. No Results"
+        else:
+            n = int(n)
+    if n < 0:
+        n = abs(n)
+    primefac = fac(n)
+    if len(primefac) == 1: return []
+    prime_dict = Counter(primefac)
+    divList = divisors(prime_dict)
+    return [primefac[-1], divList[-2]]

@@ -1,0 +1,32 @@
+https://www.onlinegdb.com/online_python_compiler
+
+def SumDivisores( n):
+    s = 0
+    i = 1
+    while(i*i <= n):
+        if(n%i==0):
+            s +=i
+            if(n / i != i):
+                if(n/i != n):
+                    s += (n/i)
+        i+=1 
+    return s 
+
+def abundant(h):
+    # your code here
+    ans = []
+    for i in range(h, 0, -1):
+        #print(i)
+        s = SumDivisores(i)
+        if(s > i):
+            x = []
+            x.append(i)
+            ans.append(x)
+            y = []
+            y.append(int(s- i))
+            ans.append(y)
+            break 
+    return ans 
+            
+
+print(abundant(19))

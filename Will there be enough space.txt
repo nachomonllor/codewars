@@ -1,0 +1,46 @@
+8 kyu
+Will there be enough space?
+121287% of 427549 of1,997user25143861 Issue Reported
+* Java
+* 1.8.0_91 (Java 8)
+* 
+Instructions
+Output
+* The story:
+Bob is working as a bus driver. However, he has become extremely popular amongst the city's residents. With so many passengers wanting to get aboard his bus, he sometimes has to face the problem of not enough space left on the bus! He wants you to write a simple program telling him if he will be able to fit all the passengers.
+Task:
+You have to write a function that accepts three parameters: cap is the amount of people the bus can hold excluding the driver, on is the number of people on the bus, and wait is the number of people waiting to get on to the bus. If there is enough space, return 0, and if there isn't, return the number of passengers he can't take.
+>>> enough(10, 5, 5)
+0 # He can fit all 5 passengers
+>>> enough(100, 60, 50)
+10 # He can't fit only 10 out of 50 waiting
+For JavaScript:
+enough(10, 5, 5);
+// 0, He can fit all 5 passengers
+enough(100, 60, 50);
+// 10, He can't fit 10 out of 50 waiting
+
+https://www.codewars.com/kata/will-there-be-enough-space/train/java
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int enough(int cap, int on, int wait){
+  // your code here
+   if( (on + wait) >= cap) {
+   	   return 0;
+   }
+   return (on + wait) - cap;
+}
+
+int main() {
+	
+	
+	return 0;
+}
+
+static int enough(final int capacity, final int alreadyOn, final int waiting){
+        return Math.max(0, waiting + alreadyOn - capacity);
+    }
+

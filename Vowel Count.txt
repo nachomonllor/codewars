@@ -1,0 +1,21 @@
+﻿Return the number (count) of vowels in the given string.
+We will consider a, e, i, o, and u as vowels for this Kata.
+
+
+http://www.codewars.com/kata/vowel-count/csharp
+public static int GetVowelCount(string str)
+        {
+            int vowelCount = 0;
+
+            // Your code here
+
+            foreach (char ch in str)
+            {
+                if ("aeiou".Contains(ch))
+                {
+                    vowelCount++;
+                }
+            }
+
+            return vowelCount;
+        }

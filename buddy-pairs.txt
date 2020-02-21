@@ -1,0 +1,142 @@
+﻿https://www.codewars.com/kata/buddy-pairs/train/csharp
+
+
+------------SOLUCION OPR g964 ---------------
+
+
+using System;
+class Bud
+{
+  private static long nbd(long n)
+  {
+    long sum = 1;
+    for (long i = 2; i <= (long)Math.Sqrt(n); i++)
+    {
+      if (n % i == 0)
+      {
+         sum += i;
+         long d = n / i;
+         if (d != i)
+           sum += d;
+      }
+    }
+    return sum;
+  }
+  public static string Buddy(long start, long limit)
+  {
+    for (long n = start; n <= limit; n++)
+    {
+      long m = nbd(n) - 1;
+      if (n == nbd(m) - 1 && n < m)
+      {
+        return "(" + Convert.ToString(n) + " " + Convert.ToString(m) + ")";
+      }
+    }
+    return "Nothing";
+  }
+}
+
+
+
+
+
+-------------------
+
+
+
+        static long SumDivisores(long n)
+        {
+            //List<int> div = new List<int>();
+            long sum = 0;
+            for (long i = 1; i *i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    //div.Add(i);
+                    sum += i;
+                    if (n / i != i && n / i != n)
+                    {
+                        //div.Add(n / i);
+                        sum += n / i;
+                    }
+                }
+
+            }
+
+            return sum;
+        }
+
+
+        public static string Buddy(long start, long limit)
+        {
+            // your code
+            Dictionary<long, long> s = new Dictionary<long, long>();
+            for (long i = start; i <= limit; i++)
+            {
+                s[i] = SumDivisores(i);
+                if(s[i] == 549219 + 1)
+                {
+                    Console.WriteLine(s[i]);
+                }
+            }
+
+
+            long[] values = s.Values.ToArray();
+            long max = values.Max();
+            if(max > limit)
+            {
+                for(long i = limit; i <= max + 1; i++)
+                {
+                    s[i] = SumDivisores(i);
+                }
+            }
+            //long minimo = values.Min();
+
+            for (long m =start - 1; m <= max + 1; m++)
+            {
+                //(n, m) are a pair of buddy 
+                //if s(m) = n + 1 and s(n) = m + 1
+                if (s.ContainsKey(m))
+                {
+                    long n = s[m]  -  1 ;
+                    if (s.ContainsKey(n) && s[n] == m + 1 && s[m] == n + 1)
+                    {
+                        //Console.WriteLine(n + " " + m);
+                        long min = Math.Min(n, m);
+                        long maxim = Math.Max(n, m);
+                        return "(" + min + " " + maxim + ")";
+                    }
+                }
+            }
+
+            return "Nothing";
+
+
+        }
+
+
+
+
+
+
+----------------------------------
+
+using NUnit.Framework;
+using System;
+
+[TestFixture]
+public class BudTest
+{
+    	private static void testing(long start, long limit, string expected) {
+		    Console.WriteLine("start: {0}, limit: {1}, expected: {2}", start, limit, expected);
+        Assert.AreEqual(expected, Bud.Buddy(start, limit));
+    }
+    [Test]
+    public static void test() {
+        testing(1071625, 1103735, "(1081184 1331967)");
+        testing(2382, 3679, "Nothing");
+        testing(8983, 13355, "(9504 20735)");        
+    }
+}
+
+
