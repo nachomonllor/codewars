@@ -1,0 +1,91 @@
+﻿Two Oldest Ages
+24987% of 2444 of 3,453jhoffner
+C#
+• Train Again
+• Next Kata
+Details
+Solutions
+Forks (1)
+Discourse (20)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age, oldest age]. 
+The order of the numbers passed in could be any order. The following are some examples of what the method should return (shown in different languages but the logic will be the same between all three). 
+LargestTwo.TwoOldestAges(new int[] {1, 2, 10, 8}) => new int[] {8, 10}
+
+https://www.codewars.com/kata/two-oldest-ages-1/csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+        public static int[] TwoOldestAges(int[] ages)
+        {
+            int max = ages[0], second = int.MinValue;
+
+            for (int i = 1; i < ages.Length; i++)
+            {
+                if (ages[i] > max)
+                {
+                    second = max;
+                    max = ages[i];
+                }
+                else if (ages[i] > second && ages[i] <= max)
+                {
+                    second = ages[i];
+                }
+            }
+            return new int[] { second, max };
+        }
+
+        public static int[] TwoOldestAges(int[] ages)
+        {
+            int oldest = int.MinValue;
+            int second = int.MinValue;
+
+            foreach (int age in ages)
+            {
+                if (age >= oldest)
+                {
+                    second = oldest;
+                    oldest = age;
+                }
+                else if (age >= second)
+                {
+                    second = age;
+                }
+            }
+
+            return new int[] { second, oldest };
+        }
+
+
+        static void Main(string[] args)
+        {
+            //int[] arr = new[] { 6, 5, 83, 83 };
+            //int[] arr = new[] { 6, 5, 83, 5, 3, 18 };
+            int[] arr = { 10, 5, 5, 5, 5, 100 };
+
+            int[] res = TwoOldestAges(arr);
+
+            foreach (int elem in res)
+            {
+                Console.Write(elem + " ");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+

@@ -1,0 +1,85 @@
+﻿6 kyu
+Anagram difference
+5197% of 3468 of115kingcobra
+Python
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Discourse (17)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+Given two words, how many letters do you have to remove from them to make them anagrams?
+Example
+• First word : c od e w ar s (4 letters removed)
+• Second word : ha c k er r a nk (6 letters removed)
+• Result : 10
+Hints
+• A word is an anagram of another word if they have the same letters (usually in a different order).
+• Do not worry about case. All inputs will be lowercase.
+• When you're done with this kata, check out its big brother/sister : https://www.codewars.com/kata/5b1b27c8f60e99a467000041
+http://www.codewars.com/kata/anagram-difference/python
+'''
+Created on 13 jun. 2018
+
+@author: Usuario
+'''
+
+#if __name__ == '__main__':
+#    pass
+
+def anagram_difference(w1, w2):
+    a = {}
+    b = {}
+    
+    for ch in w1:
+        if ch in a:
+            a[ch]+=1
+        else:
+            a[ch]=1
+    for ch in w2:
+        if ch in b:
+            b[ch]+=1
+        else:
+            b[ch] = 1
+    
+    comunes = 0
+    for k,v in a.items():
+        if k in b:
+            comunes += min(v, b.get(k))*2
+    
+    return len(w1) + len(w2) - comunes 
+            
+        
+    
+    #for k,v in a.items():
+    #    print ("%s -> %s" %(k,v))
+    
+w1=   "codewars"
+w2 =  "hackerrank" 
+    
+print(anagram_difference(w1,w2))
+
+
+
+ ------------SOLUCION POR dtkatch ------------------------
+
+    
+def anagram_difference(w1, w2):
+    l1 = 26 * [0]
+    l2 = 26 * [0]
+    for i in range(len(w1)):
+        l1[ ord('a')-ord(w1[i]) ] += 1
+    for i in range(len(w2)):
+        l2[ ord('a')-ord(w2[i]) ] += 1
+    r = 0
+    for i in range(26):
+        r += abs( l1[i] - l2[i] )
+    return r
+
+    
+

@@ -1,0 +1,43 @@
+﻿7 kyu
+Array Array Array
+11389% of 101122 of425A.Partridge
+Python
+• TRAIN AGAIN
+• NEXT KATA
+Details
+Solutions
+Forks (1)
+Discourse (8)
+• Add to Collection
+• |
+• Share this kata:
+• 
+• 
+• 
+You are given an initial 2-value array (x). You will use this to calculate a score.
+If both values in (x) are numbers, the score is the sum of the two. If only one is a number, the score is that number. If neither is a number, return 'Void!'.
+Once you have your score, you must return an array of arrays. Each sub array will be the same as (x) and the number of sub arrays should be equal to the score.
+For example:
+if (x) == ['a', 3] you should return [['a', 3], ['a', 3], ['a', 3]].
+FUNDAMENTALS
+STRINGS
+NUMBERS
+ARRAYS
+These users have contributed to this kata:
+https://www.codewars.com/kata/array-array-array/python
+def explode(arr):  
+    l = 0
+    if (str(arr[0]).isdigit() and str(arr[1]).isdigit()):
+        l = arr[0] + arr[1]
+    elif(str(arr[0]).isdigit()):
+        l = arr[0]
+    elif(str(arr[1]).isdigit()):
+        l = arr[1]
+    else:
+        return 'Void!'
+    a = []
+    for i in range(l):
+        a.append(arr)
+    return a 
+
+print(explode(['a', 3]))   
