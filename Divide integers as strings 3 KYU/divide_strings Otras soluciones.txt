@@ -1,0 +1,137 @@
+﻿
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<string> divide_strings(string a, string b) 
+{
+        vector<string> quot_rema = {"0", "0"};
+        if ( a.length() < b.length() ) return {"0", a};
+        a = '0' + a; 
+        for (int i = 1; i <= a.length()-b.length(); i++)
+        {
+                short res = 0;
+                while ( a.substr(i, b.size()) >= b or a[i-1] != '0' )
+                {
+                        for (int k = b.length()-1; k >=0; k--)
+                        {
+                                if ( a[i+k] < b[k] ) a[i+k-1]--;
+                                a[i+k] = 48 + int(a[i+k]) - int(b[k]);
+                                if ( a[i+k] < 48 ) a[i+k] += 10;
+                        }
+                        res++;
+                }
+                quot_rema[0] = quot_rema[0] + to_string(res);
+        }
+        quot_rema[1] = a; 
+        for (int i = 0; i < quot_rema.size(); i++)
+        {
+                int j = 0;
+                while ( quot_rema[i][j] == '0' and j != quot_rema[i].length()-1)
+                {
+                        j++;
+                }
+                quot_rema[i].erase(0,j);
+        }
+        return quot_rema;
+}
+
+//----------------------------------
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int compare(string s1, string s2){
+  int s1_size = s1.size(), s2_size = s2.size();
+  if (s1_size < s2_size || (s1_size == s2_size && s1 < s2)) return 2;
+  return 1;
+}
+
+string subtraction(string s1, string s2){
+  int carry = 0, s2_size = s2.size();
+  string res = "";
+  for (auto t1 = s1.rbegin(), t2 = s2.rbegin(); t2 != s2.rend(); t1++, t2++){
+    if (*t1 - '0' - carry < *t2 - '0'){ 
+      res = to_string(*t1 - carry + 10 - *t2) + res;
+      carry = 1;
+    }
+    else {
+      res = to_string(*t1 - carry - *t2) + res;
+      carry = 0;
+    }
+  }
+  for (auto t1 = s1.rbegin() + s2_size; t1 != s1.rend(); t1++){
+    if (*t1 - '0' - carry < 0){ 
+      res = to_string(*t1 - '0' - carry + 10) + res;
+      carry = 1;
+    }
+    else {
+      res = to_string(*t1 - '0' - carry) + res;
+      carry = 0;
+    }
+  }
+  return res;
+}
+
+string multiply(string s, int k){
+  int carry = 0, temp = 0;
+  string res = "";
+  for (auto a = s.rbegin(); a!= s.rend(); a++){
+    temp = (*a - '0') * k + carry;
+    res = to_string(temp%10) + res;
+    carry = temp/10;
+  }
+  if (carry>0) res = to_string(carry) + res;
+  return res;
+}
+
+vector<string> divide_strings(string a, string b) {
+//   return vector<string> {to_string(stoll(a, nullptr, 10) / stoll(b, nullptr, 10)), to_string(stoll(a, nullptr, 10) % stoll(b, nullptr, 10))}; // This might work for the sample tests and maybe even half of the random tests but it won't work for arbitrarily large integers ;-)
+  int a_size = a.size(), b_size = b.size();
+  cout<<a<<'\t'<<b<<endl<<endl;
+  
+  if (compare(a, b) == 2) return vector<string> {"0", a};
+  
+  string result = "", temp = string(a.begin(), a.begin() + b_size);
+  if (compare(temp, b) == 2) temp += a[b_size];
+  int t_size = temp.size(), i = t_size, f ;
+  
+  vector <string> b_table(10, "-1");
+  b_table[0] = "0";
+  b_table[1] = b;
+  
+  while (i <= a_size){
+    cout<<temp<<'\t';
+    if (compare(temp, b) == 2) {
+      result += "0";
+    }
+    else {
+      f = b_size < t_size ? stoi(temp.substr(0,2)) / int(b[0]-'0') : int(temp[0] - '0') / int(b[0] - '0');
+      if (f > 9) f = 9;
+      while (true){
+        if (b_table[f] == "-1") b_table[f] = multiply(b,f);
+        if (compare(temp, b_table[f]) == 1) break;
+        f--;
+      }
+      result = result + to_string(f);
+      temp = subtraction(temp, b_table[f]);
+    }
+    if (i == a_size){
+      temp = temp.erase(0, temp.find_first_not_of('0'));
+      t_size = temp.size(); 
+      break;
+    }
+    temp += a[i];
+    temp = temp.erase(0, temp.find_first_not_of('0'));
+    i++;
+    t_size = temp.size();
+  }
+  if (t_size == 0) temp = "0";
+  
+  return vector<string> {result, temp};
+}

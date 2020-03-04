@@ -1,0 +1,382 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+
+        // Returns true if str1 is smaller than str2. 
+        static bool isSmaller(string str1, string str2)
+        {
+            // Calculate lengths of both string 
+            int n1 = str1.Length, n2 = str2.Length;
+            if (n1 < n2)
+                return true;
+            if (n2 < n1)
+                return false;
+
+            for (int i = 0; i < n1; i++)
+                if (str1[i] < str2[i])
+                    return true;
+                else if (str1[i] > str2[i])
+                    return false;
+
+            return false;
+        }
+
+        // Function for find difference of larger numbers 
+        static string findDiff(string str1, string str2)
+        {
+            // Before proceeding further, make sure str1 
+            // is not smaller 
+            if (isSmaller(str1, str2))
+            {
+                string t = str1;
+                str1 = str2;
+                str2 = t;
+            }
+
+            // Take an empty string for storing result 
+            string str = "";
+
+            // Calculate length of both string 
+            int n1 = str1.Length, n2 = str2.Length;
+
+            // Reverse both of strings 
+            char[] ch1 = str1.ToCharArray();
+            Array.Reverse(ch1);
+            str1 = new string(ch1);
+            char[] ch2 = str2.ToCharArray();
+            Array.Reverse(ch2);
+            str2 = new string(ch2);
+
+            int carry = 0;
+
+            // Run loop till small string length 
+            // and subtract digit of str1 to str2 
+            for (int i = 0; i < n2; i++)
+            {
+                // Do school mathematics, compute difference of 
+                // current digits 
+                int sub = ((int)(str1[i] - '0') -
+                        (int)(str2[i] - '0') - carry);
+
+                // If subtraction is less then zero 
+                // we add then we add 10 into sub and 
+                // take carry as 1 for calculating next step 
+                if (sub < 0)
+                {
+                    sub = sub + 10;
+                    carry = 1;
+                }
+                else
+                    carry = 0;
+
+                str += (char)(sub + '0');
+            }
+
+            // subtract remaining digits of larger number 
+            for (int i = n2; i < n1; i++)
+            {
+                int sub = ((int)(str1[i] - '0') - carry);
+
+                // if the sub value is -ve, then make it positive 
+                if (sub < 0)
+                {
+                    sub = sub + 10;
+                    carry = 1;
+                }
+                else
+                    carry = 0;
+
+                str += (char)(sub + '0');
+            }
+
+            // reverse resultant string 
+            char[] ch3 = str.ToCharArray();
+            Array.Reverse(ch3);
+            return new string(ch3);
+        }
+
+        static string multiplicar(string a, string b)
+        {
+            string C = "";
+            int next = 0;
+            for (int k = 0; k < a.Length + b.Length - 1; k++)
+            {
+                int cur = next;
+                int i, j;
+                if (k < a.Length)
+                {
+                    i = a.Length - 1 - k;
+                    j = b.Length - 1;
+                }
+                else
+                {
+                    i = 0;
+                    j = a.Length + b.Length - 2 - k;
+                }
+                while (i < a.Length && j >= 0)
+                {
+                    //cur += int.Parse(a[i].ToString()) * int.Parse(b[j].ToString());
+                    cur += (a[i] - '0') * (b[j] - '0');
+                    i++;
+                    j--;
+                }
+
+                //C = C.Insert(0, (cur % 10).ToString());
+                C = (cur % 10) + C;
+                next = cur / 10;
+
+            }
+            if (next > 0)
+            {
+                //C = C.Insert(0, next.ToString());
+                C = next + "" + C;
+            }
+
+            return C;
+        }
+
+
+        /// <summary>
+        /// retorna 1 si el a > b
+        /// -1 si a < b
+        /// 0 si son iguales
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        static int Comparar(string a, string b)
+        {
+            if (a.Length > b.Length)
+            {
+                return 1;
+            }
+            else if (b.Length > a.Length)
+            {
+                return -1;
+            }
+            if (a == b)
+            {
+                return 0;
+            }
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] - '0' > b[i] - '0')
+                {
+                    return 1;
+                }
+                else if (b[i] - '0' > a[i] - '0')
+                {
+                    return -1;
+                }
+
+            }
+
+            return 0;
+
+        }
+
+        static string SacarCeros(string num)
+        {
+            int i = 0;
+            for (; i < num.Length; i++)
+            {
+                if (num[i] != '0')
+                {
+                    break;
+                }
+            }
+
+
+            string r = num.Substring(i);
+            // return 
+            if (r == "") return "0";
+            return r;
+        }
+
+
+        static void divide_strings(string dividendo, string divisor)
+        {
+
+            if (dividendo == divisor)
+            {
+                //Console.WriteLine("resto nuevo: " + "0");
+                //Console.WriteLine("resultado: " + "1");
+                //return "1";
+                Console.WriteLine("1 0");
+                return;
+
+            }
+            else if (divisor == "1")
+            {
+               // Console.WriteLine("resto: 0");
+               // Console.WriteLine("resultado: " + dividendo);
+                Console.WriteLine(dividendo + " 0");
+                return;
+            }
+
+            //1. Selecciono substring del dividendo con len(dividendo) = len(divisor)
+            string subsdividendo = dividendo.Substring(0, divisor.Length);
+
+            //1.a.  me fijo si el subsdividendo es mayor o igual que el divisor 
+            //Si subsdividendo < divisor, entonces agrando en 1 subsdividendo(concateno 1 digito mas )
+
+            string cociente = "";
+            int indice_concatenar = subsdividendo.Length;
+
+            if (Comparar(subsdividendo, divisor) == -1)//Si subsdividendo < divisor
+            {
+                //suponiendo que subsdividendo.Length + 1 <= dividendo.Length 
+                if (indice_concatenar < dividendo.Length)
+                {
+                    subsdividendo += dividendo[indice_concatenar];
+                    indice_concatenar++;
+                }
+            }
+
+            string restotemporal = "", resto_nuevo = "";
+
+            //2.	Selecciono el substring temporal del dividendo (substemporaldividendo):
+            //Comparo el primer digito del subsdividendo con el primer digito del divisor
+            //2.a. Si : el primer digito de substemporaldividendo es menor que el primer digito de divisor, 
+            //entonces lo agrando en 1 digito (concateno)  y quedarían 2 digitos en substemporaldividendo.
+
+            // while (Comparar(subsdividendo, divisor) >= 0) //cuando subsdividendo es menor que el divisor no entra al while
+            while (true)
+            {
+                subsdividendo = SacarCeros(subsdividendo);
+
+                // 2.b Divido: substemporaldividendo / primer_digito _divisor para hallar X => NO
+                // int X = (int.Parse(substemporaldividendo) / (divisor[0] - '0'));
+                int X = 10;
+
+
+                //3. Divido el subsdividendo entre divisor[0]:
+                //    - El resultado x lo multiplico por TODO el divisor.
+                //    - Entonces x * divisor = restotemporal
+
+                restotemporal = SacarCeros(multiplicar(X + "", divisor));
+
+               // Console.WriteLine("restotemporal dentro del while " + restotemporal);
+
+
+                //4. MIENTRAS restotemporal > subsdividendo entonces,
+                //        4.a. X lo disminuyo en 1
+                //        4.b. vuelvo a multiplicar X * divisor que es igual a restotemporal.
+
+                while (Comparar(restotemporal, subsdividendo) == 1)
+                {
+                    X--;
+                    restotemporal = SacarCeros(multiplicar(X + "", divisor));
+                    if (X < 0)
+                    {
+                        X = 0;
+                        restotemporal = "0";
+                    }
+                }
+
+                cociente += X + "";
+
+                //5. resto a subsdividendo - restotemporal 
+                resto_nuevo = SacarCeros(findDiff(subsdividendo, restotemporal));
+                if (indice_concatenar >= dividendo.Length) break;
+
+                //6. al nuevo resto_nuevo concateno el digito siguiente de subsdividendo (bajo el digito).
+
+                resto_nuevo += dividendo[indice_concatenar];
+
+                resto_nuevo = SacarCeros(resto_nuevo);
+
+                if (indice_concatenar >= dividendo.Length) break;
+
+                indice_concatenar++;
+
+
+
+                subsdividendo = resto_nuevo;
+                restotemporal = "0";
+
+
+
+                // 7. Vuelvo al paso 2, hasta que no haya más dígitos que “bajar”
+
+
+            }
+
+            // Console.WriteLine("resto temporal: " + restotemporal);
+           // Console.WriteLine("resto nuevo: " + resto_nuevo);
+           // Console.WriteLine("resultado: " + cociente);
+
+            Console.WriteLine(cociente + " " + resto_nuevo);
+
+        }
+
+
+        static void Main(string[] args)
+        {
+
+            //string dividendo = "487";//8
+            //string divisor = "56";
+
+            //string dividendo = "631487";//862
+            //string divisor = "732";
+
+            //Console.WriteLine(multiplicar("487", "56"));
+
+
+            //string dividendo = "7643874368743437";//104363206978,73430908073126442117
+            //string divisor = "73243";
+
+
+            //string dividendo = "4587";//59
+            //string divisor = "77";
+
+            //string dividendo = "1001";
+            //string divisor = "10";
+
+
+            //string dividendo = "5";
+            //string divisor = "2";
+
+            //string dividendo = "9579878754899797575489754975498758975897597598547895479575898489343763782638636383267832632876328732673267832673278368368327837838763643786438"; 
+            //string divisor = "987897897895758975897589758974374389434387834437843439874343948";
+
+
+            //string dividendo = "11111";
+            //string divisor = "11";
+
+
+            //string dividendo = "900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000098398287127211282621787237832632832676328732888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888676738286233268236328323232863283";
+            //string divisor = "11";
+
+            //string dividendo = "900";
+            //string divisor = "11";
+
+
+            divide_strings("0", "5"); // , EqualsContainer(vector<string> {"0", "0"}));
+            divide_strings("4", "5"); //, EqualsContainer(vector<string> {"0", "4"}));
+            divide_strings("10", "2"); //, EqualsContainer(vector<string> {"5", "0"}));
+            divide_strings("20", "3"); //, EqualsContainer(vector<string> {"6", "2"}));
+            divide_strings("60", "5"); //, EqualsContainer(vector<string> {"12", "0"}));
+            divide_strings("219", "11"); //, EqualsContainer(vector<string> {"19", "10"}));
+            divide_strings("729", "9"); //, EqualsContainer(vector<string> {"81", "0"}));
+            divide_strings("1000", "10"); //, EqualsContainer(vector<string> {"100", "0"}));
+            divide_strings("600001", "100"); //, EqualsContainer(vector<string> {"6000", "1"}));
+
+
+            // divide_strings(dividendo, divisor);
+            //Console.WriteLine( findDiff("2", "5"));
+
+            Console.ReadLine();
+        }
+
+
+    }
+}
