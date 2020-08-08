@@ -1,0 +1,38 @@
+﻿ https://www.codewars.com/kata/56a5d994ac971f1ac500003e/solutions/csharp
+
+public static String LongestConsec(string[] strarr, int k)
+        {
+
+            if (strarr.Length == 0 || k <= 0 || k > strarr.Length || strarr == null) return "";
+
+            string max = "";
+
+            string concat = "";
+            for (int i = 0; i < k; i++)
+            {
+                concat += strarr[i];
+
+            }
+
+            max = concat;
+
+            for (int i = 0; i + k < strarr.Length; i++)
+            {
+
+                if (strarr[i].Length > 0)
+                {
+                    concat = concat.Remove(0, strarr[i].Length);
+                }
+
+                concat += strarr[i + k];
+
+                if (concat.Length > max.Length)
+                {
+                    max = concat;
+                }
+
+            }
+
+            return max;
+
+        }

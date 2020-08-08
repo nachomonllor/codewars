@@ -1,0 +1,251 @@
+﻿https://www.codewars.com/kata/58a3b28b2f949e21b3000001/train/csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication69
+{
+    class Program
+    {
+
+
+
+        public static int BishopsAndRooks(int[][] ChessBoard)
+        {
+            int desocupados = 0;
+            for (int i = 0; i < ChessBoard.Length; i++)
+            {
+                for (int j = 0; j < ChessBoard[i].Length; j++)
+                {
+
+                    bool flag = false;
+                    //busco torre arriba
+
+                    for (int k = i; k >= 0; k--)
+                    {
+                        //for(int l = j; l < )
+                        if (ChessBoard[k][j] == -1) //antes hay un alfil que intercepta el ataque de la torre
+                        {
+                            break;
+                        }
+                        if (ChessBoard[k][j] == 1) //encontro torre
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    //busco torre abajo
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        for (int k = i; k < ChessBoard.Length; k++)
+                        {
+                            if (ChessBoard[k][j] == -1) //antes hay un alfil que intercepta el ataque de la torre
+                            {
+                                break;
+                            }
+                            if (ChessBoard[k][j] == 1) //encontro torre
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    //busco torre a la izquierda de la pieza actual
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        for (int k = j; k >= 0; k--)
+                        {
+                            if (ChessBoard[i][k] == -1) //antes hay un alfil que intercepta el ataque de la torre
+                            {
+                                break;
+                            }
+                            if (ChessBoard[i][k] == 1) //encontro torre
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    //busco torre a la derecha de la pieza actual 
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        for (int k = j; k < ChessBoard[i].Length; k++)
+                        {
+                            if (ChessBoard[i][k] == -1) //antes hay un alfil que intercepta el ataque de la torre
+                            {
+                                break;
+                            }
+                            if (ChessBoard[i][k] == 1) //encontro torre
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+
+
+                    //BUSCO EN DIAGONALES PARA ENCONTRAR ALFILES QUE NO TENGAN ANTES UNA TORRE
+
+
+                    //diagonal principal
+                    // hacia izquierda - arriba
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        int fila = i, col = j;
+
+                        while (fila >= 0 && col >= 0)
+                        {
+                            if (ChessBoard[fila][col] == 1) //encontro torre que intercepta el ataque del alfil
+                            {
+                                break;
+                            }
+                            if (ChessBoard[fila][col] == -1) //antes hay un alfil
+                            {
+                                flag = true;
+                                break;
+                            }
+
+                            fila--;
+                            col--;
+                        }
+                    }
+
+                    //diagonal principal
+                    //hacia derecha-abajo
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        int fila = i, col = j;
+
+                        while (fila < ChessBoard.Length && col < ChessBoard[i].Length)
+                        {
+                            if (ChessBoard[fila][col] == 1) //encontro torre que intercepta el ataque del alfil
+                            {
+                                break;
+                            }
+                            if (ChessBoard[fila][col] == -1) //antes hay un alfil
+                            {
+                                flag = true;
+                                break;
+                            }
+
+                            fila++;
+                            col++;
+                        }
+                    }
+
+
+                    //diagonal secundaria
+                    //arriba - derecha
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        int fila = i, col = j;
+
+                       
+                        while(  fila >=0  && col < ChessBoard[i].Length )
+                        {
+                            if (ChessBoard[fila][col] == 1) //encontro torre que intercepta el ataque del alfil
+                            {
+                                break;
+                            }
+                            if (ChessBoard[fila][col] == -1) //antes hay un alfil
+                            {
+                                flag = true;
+                                break;
+                            }
+
+                            fila--;
+                            col++;
+                        }
+                    }
+
+
+                    //diagonal secundaria
+                    //abajo izquierda
+                    if (flag == false) //solo recorro si no esta atacado el casillero actual
+                    {
+                        int fila = i, col = j;
+                        //while (fila >= 0 && col < ChessBoard[i].Length)
+                        while (fila < ChessBoard.Length && col >=0 )
+                        {
+                            if (ChessBoard[fila][col] == 1) //encontro torre que intercepta el ataque del alfil
+                            {
+                                break;
+                            }
+                            if (ChessBoard[fila][col] == -1) //antes hay un alfil
+                            {
+                                flag = true;
+                                break;
+                            }
+
+                            fila++;
+                            col--;
+                        }
+                    }
+
+
+                    if (flag == false)
+                    {
+                        desocupados++;
+                    }
+
+
+                }
+            }
+
+            return desocupados;
+
+        }
+
+
+
+        static void Main(string[] args)
+        {
+
+            //var ChessBoard = new int[][]{
+            //                 new int[]{ 1, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0,-1, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+            //                 new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}};
+
+
+            var ChessBoard = new int[][]{
+                             new int[]{1,0,0,0,0,0,0,0}, 
+                             new int[]{0,0,0,0,0,0,0,0}, 
+                             new int[]{0,-1,0,0,1,0,0,0}, 
+                             new int[]{0,0,0,0,0,0,0,0}, 
+                             new int[]{0,0,0,0,0,0,0,0}, 
+                             new int[]{0,0,0,-1,-1,0,0,0}, 
+                             new int[]{0,0,0,0,0,0,0,0}, 
+                             new int[]{0,0,0,0,0,0,0,0}}; //20
+
+
+             //var ChessBoard = new int[][]{
+             //                new int[]{ 0, 0, 0,-1, 0, 0, 0, 1}, 
+             //                new int[]{ 0, 0, 0, 0, 1, 0, 0, 0}, 
+             //                new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+             //                new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+             //                new int[]{ 0, 1, 0, 0,-1, 0, 0, 0}, 
+             //                new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+             //                new int[]{ 0, 0, 0, 0, 0, 0, 0, 0}, 
+             //                new int[]{ 1, 0, 0, 0, 0, 0, 0, 0}}; 
+
+
+             Console.WriteLine(  BishopsAndRooks(ChessBoard));
+
+
+            Console.ReadLine();
+
+
+        }
+    }
+}
