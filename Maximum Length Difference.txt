@@ -1,0 +1,53 @@
+﻿https://www.codewars.com/kata/5663f5305102699bad000056
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication72
+{
+    class Program
+    {
+
+        public static char solve(string s)
+        {
+
+
+            char max_char = '-';
+            int max_dif = 0;
+
+            //for (int i = 0; i < s.Length; i++)
+            for (char ch = 'a'; ch <= 'z'; ch++ )
+            {
+                int dif = 0;
+                if (s.IndexOf(ch) >= 0)
+                {
+                   dif = s.LastIndexOf(ch) - s.IndexOf(ch) + 1;
+                }
+
+                if (dif > max_dif)
+                {
+                    max_dif = dif;
+                    max_char = ch;
+                }
+            }
+
+            return max_char;
+
+
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine(solve("dcbadcba"));
+            Console.WriteLine(solve("efghijefghi"));
+
+            Console.ReadLine();
+
+        }
+
+
+    }
+}
