@@ -1,53 +1,47 @@
-﻿https://www.codewars.com/kata/5663f5305102699bad000056
+﻿ 
+https://www.codewars.com/kata/5663f5305102699bad000056/solutions/csharp
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApplication72
-{
-    class Program
-    {
-
-        public static char solve(string s)
+public static int Mxdiflg(string[] a1, string[] a2)
         {
 
-
-            char max_char = '-';
-            int max_dif = 0;
-
-            //for (int i = 0; i < s.Length; i++)
-            for (char ch = 'a'; ch <= 'z'; ch++ )
+            if (a1 == null || a1.Length == 0 || a2 == null || a2.Length == 0)
             {
-                int dif = 0;
-                if (s.IndexOf(ch) >= 0)
+                return -1;
+            }
+
+            int len_min1 = int.MaxValue,
+                len_max1 = 0,
+                len_min2 = int.MaxValue,
+                len_max2 = 0;
+
+
+            for (int i = 0; i < a1.Length; i++)
+            {
+                if (a1[i].Length > len_max1)
                 {
-                   dif = s.LastIndexOf(ch) - s.IndexOf(ch) + 1;
+                    len_max1 = a1[i].Length;
                 }
 
-                if (dif > max_dif)
+                if (a1[i].Length < len_min1)
                 {
-                    max_dif = dif;
-                    max_char = ch;
+                    len_min1 = a1[i].Length;
+                }
+
+            }
+
+            for (int i = 0; i < a2.Length; i++)
+            {
+                if (a2[i].Length > len_max2)
+                {
+                    len_max2 = a2[i].Length;
+                }
+                if (a2[i].Length < len_min2)
+                {
+                    len_min2 = a2[i].Length;
                 }
             }
 
-            return max_char;
+            return new int[] { Math.Abs( len_max2 - len_min1), Math.Abs( len_max1 - len_min2 ) }.Max();
 
 
         }
-
-        static void Main(string[] args)
-        {
-            Console.WriteLine(solve("dcbadcba"));
-            Console.WriteLine(solve("efghijefghi"));
-
-            Console.ReadLine();
-
-        }
-
-
-    }
-}
