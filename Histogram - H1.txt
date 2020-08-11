@@ -1,0 +1,23 @@
+﻿https://www.codewars.com/kata/histogram-h1/
+
+ public static string Histogram(int[] results)
+        {
+            string ans = "";
+            for (int i = results.Length - 1; i >= 0; i--)
+            {
+
+                ans += (i + 1) + "|" + new string('#', results[i]);
+                if (results[i] > 0)
+                {
+                    ans += " " + results[i] + "\n";
+                }
+                else
+                {
+                    ans += "\n";
+                }
+
+            }
+
+            return ans;
+
+        }
