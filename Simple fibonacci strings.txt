@@ -1,0 +1,22 @@
+﻿https://www.codewars.com/kata/5aa39ba75084d7cf45000008/solutions/csharp
+
+
+        public static String solve(int n)
+        {
+            string f0 = "0";
+            string f1 = "01";
+
+            if (n == 0) return f0;
+            if (n == 1) return f1;
+
+            string f2 = "010";
+            for (int i = 2; i <= n; i++)
+            {
+                f2 = f1 + f0;
+                //Console.WriteLine(f2);
+                f0 = f1;
+                f1 = f2;
+            }
+            return f2;
+
+        }
