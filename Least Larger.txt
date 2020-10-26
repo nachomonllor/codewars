@@ -1,0 +1,23 @@
+
+
+
+https://www.codewars.com/kata/5f8341f6d030dc002a69d7e4/train/python
+
+def least_larger(a, i): 
+    # your code here
+    
+    elem = a[i]
+
+    hash = {}
+
+    for i in range(0, len(a)):
+        hash[a[i]] = i 
+
+
+    for i in range(elem + 1, max(a) + 1):
+        if i in hash:
+            return hash[i]
+    return -1 
+
+
+print( least_larger( [4, 1, 3, 5, 6], 0 ))

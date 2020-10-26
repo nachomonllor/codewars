@@ -1,0 +1,28 @@
+
+https://www.codewars.com/kata/59f08f89a5e129c543000069/python
+
+def removerDuplicados(s):
+
+    concat = ""
+    anterior = s[0]
+    concat += anterior
+    for i in range(1, len(s)):
+        if s[i] != anterior:
+            concat += s[i]
+        anterior = s[i]
+    return concat
+
+def dup(arry):
+    
+    ans = []
+    for item in arry:
+        ans.append(removerDuplicados(item))
+    return ans 
+
+
+    
+
+
+s = "cooddddddewaaaaarrrrs"
+
+print(removerDuplicados(s))

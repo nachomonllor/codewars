@@ -1,0 +1,14 @@
+
+
+https://www.codewars.com/kata/554e4a2f232cdd87d9000038/solutions/python
+
+
+def DNA_strand(dna):
+    # code here
+    diccio = {'A': 'T', 'T': 'A',  'G': 'C', 'C':'G' }
+    
+    concat = ""
+    for item in dna:
+        concat += diccio[item]
+
+    return concat

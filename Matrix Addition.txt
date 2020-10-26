@@ -1,0 +1,14 @@
+
+https://www.codewars.com/kata/526233aefd4764272800036f/python
+
+
+def matrix_addition(a, b):
+    
+    r = []
+
+    for i in range(len(a)):
+        fila = []
+        for j in range(len(a[i])):
+            fila.append(a[i][j] + b[i][j])
+        r.append(fila)
+    return r 

@@ -1,0 +1,23 @@
+
+
+https://www.codewars.com/kata/5f5802bf4c2cc4001a6f859e/train/python
+
+def grid_index(grid, indexes):
+
+    hash = {}
+
+    k = 1
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            hash[k] = [i,j]
+            k += 1
+    
+    concat = ""
+
+    for item in indexes:
+        concat += ( grid [  hash[item][0] ] [  hash[item][1]])
+    return concat
+
+
+
+print(grid_index([['m', 'y', 'e'], ['x', 'a', 'm'], ['p', 'l', 'e']], [1, 2, 3, 4, 5, 6, 7, 8, 9]))

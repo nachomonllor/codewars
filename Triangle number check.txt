@@ -1,0 +1,44 @@
+
+
+def esEntero(s):
+
+    for i in range(len(s)):
+        if not ( '0'<= s[i] and s[i] <= '9' ):
+            return False
+    return True
+
+
+https://www.codewars.com/kata/557e8a141ca1f4caa70000a6/python
+
+def is_triangle_number(number):
+    # Your code here
+
+    if not esEntero(str(number)):
+        return False
+
+    suma = 0
+
+    i = 0
+
+    while suma <= number:
+        suma += i
+        i += 1
+        if suma == number:
+            return True
+        if suma > number:
+            break
+    return False
+
+--------------------------------------------------
+
+from math import sqrt
+
+def is_triangle_number(number):
+    if type(number) is not int:
+        return False
+    
+    n = (-1 + sqrt(1 + 8 * number)) / 2.0
+    if n.is_integer():
+        return True
+    
+    return False
