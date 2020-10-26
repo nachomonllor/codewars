@@ -1,0 +1,80 @@
+
+https://www.codewars.com/kata/5a28cf591f7f7019a80000de/train/python
+
+def obtenerFaltante(s):
+
+    minimo = min(s)
+    maximo = max(s)
+
+
+    if maximo - minimo  > len(s) or len(s ) == 1:
+        return -1
+
+    f = []
+
+
+    for item in range(minimo, maximo + 1):
+        if not item in s:
+            f.append(item)
+
+    if len(f) == 1:
+        return f[0]
+    return -1
+
+
+def missing(s):
+    
+    t = 1
+
+    tam = t 
+    while t <= len(s):
+
+
+        arr = set()
+        tam = t
+        i = 0
+
+        while i < len(s):
+
+            subs = s[i : i + tam]
+
+            arr.add(int(subs))
+
+            #if todosNueves(subs):
+            if subs == '9' * len(subs):
+               tam += 1 
+               i += tam - 1
+            else:
+               i += tam 
+
+      
+
+        # print(arr, obtenerFaltante(arr) )
+
+        faltante = obtenerFaltante(arr)
+
+        if faltante != -1:
+            return faltante
+
+
+        t += 1 
+
+        #print(obtenerFaltante(arr))
+    return -1
+      
+
+
+s = "979899100101102"
+print(missing(s))
+
+
+s = "123567"
+print(missing(s))
+
+
+
+
+#s = "98100"
+#print(missing(s))
+
+

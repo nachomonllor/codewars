@@ -1,0 +1,110 @@
+﻿https://www.codewars.com/kata/find-x/train/python
+
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+long long find_x(int n) {
+  
+    if (n == 1) return 1;
+	long long a = 1;
+	long long b = 15;
+	long long c = 32;
+	for (int i = 1; i < n; i++)
+	{
+	    //Console.WriteLine(a);
+	    a += b;
+	    b += c;
+	    c += 18;
+	}
+	
+	return a;
+}
+
+
+int main() {
+	
+	cout << find_x(40) << endl;
+	
+	return 0;
+}
+--------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+
+
+        //def find_x(n):
+        //x = 0
+        //for i in range(n) :
+        //    for j in range(2*n) :
+        //        x += j + i
+        //return x
+
+        static int find_x(int n)
+        {
+            int x = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < 2 * n; j++)
+                {
+                    x += j + i;
+                }
+            }
+
+            return x;
+        }
+
+        //static int find_x(int n)
+        //{
+
+
+
+
+
+        //    return x;
+        //}
+
+
+        static void Main()
+        {
+
+            //int b = 0;
+            //int c = 32;
+            //int d = 15;
+            int a = 1;
+            int b = 15;
+            int c = 32;
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(a);
+                a += b;
+                b += c;
+                c += 18;
+            }
+
+            Console.WriteLine();
+
+            for (int i =1; i<10; i++)
+            {
+                Console.WriteLine( find_x(i));
+            }
+
+
+            Console.ReadLine();
+        }
+
+
+
+
+    }
+}

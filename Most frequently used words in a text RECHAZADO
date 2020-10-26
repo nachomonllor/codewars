@@ -1,0 +1,187 @@
+﻿https://www.codewars.com/kata/most-frequently-used-words-in-a-text/train/java
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication31;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ *
+ * @author Usuario
+ */
+public class JavaApplication31 {
+
+     public static List<String> top3(String s)
+        {
+            // Your code here
+            HashMap<String, Integer> dic = new HashMap();
+            //String[] sp = s.split(new char[] { '/', ' ', '.', ',' });
+            //String[] sp = s.split("[/ .,]");
+            String[] sp = s.split("[/ .,]");
+
+            //for(int i =0; i<sp.length; i++) {
+            //    System.out.println(sp[i]);
+            //}
+            for (int i = 0; i < sp.length; i++)
+            {
+                String item = sp[i].toLowerCase().trim();
+                if (item.equals("")) continue;
+                if (dic.containsKey(item))
+                {
+                    //dic[item]++;
+                    dic.put(item, dic.get(item) + 1);
+                }
+                else
+                {
+                    //dic[item] = 1;
+                    dic.put(item, 1);
+                }
+            }
+
+
+
+            String pk="", sk="", tk="";
+            int pv=0, sv=0, tv=0;
+
+            //foreach (KeyValuePair<string, int> kvp in dic)
+            for(String key : dic.keySet())
+            {
+                if (dic.get(key) > pv)
+                {
+
+                    //third = second
+                    //second = first
+                    tk = sk;
+                    tv = sv;
+
+                    sk = pk;
+                    sv = pv;
+
+                    pv = dic.get(key);
+                    pk = key;
+                }
+                else if (dic.get(key) > sv)
+                {
+                    tv = sv;
+                    tk = sk;
+
+                    sv = dic.get(key);
+                    sk = key;
+                }
+                else if (dic.get(key) > tv)
+                {
+                    tv = dic.get(key);
+                    tk = key;
+                }
+            }
+
+            List<String> ans = new ArrayList();
+            if (pk.length() > 0) ans.add(pk);
+            if (sk.length() > 0) ans.add(sk);
+            if (tk.length() > 0) ans.add(tk);
+            //Console.WriteLine(pk + " " + sk + " " + tk);
+
+            return ans;
+        }
+    public static void main(String[] args) {
+        // TODO code application logic here
+        /*
+        String s = "In a village of La Mancha, the name of which I have no desire to call to " +
+                        "mind, there lived not long since one of those gentlemen that keep a lance " +
+                        "in the lance-rack, an old buckler, a lean hack, and a greyhound for " +
+                        "coursing. An olla of rather more beef than mutton, a salad on most " +
+                        "nights, scraps on Saturdays, lentils on Fridays, and a pigeon or so extra " +
+                        "on Sundays, made away with three-quarters of his income. ";
+        */
+        String s = "a a a  b  c c  d d d d  e e e e e";
+        //String s = "  '''  ";
+        List<String> lista = top3(s);
+         
+        for(String item : lista) {
+            System.out.print(item + " ");
+        }
+        
+    }
+    
+}
+
+
+------------------------------------------------------------------------------
+
+
+ public static List<String> top3(String s)
+        {
+            // Your code here
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            String[] sp = s.Split(new char[] { '/', ' ', '.', ',' });
+            for (int i = 0; i < sp.Length; i++)
+            {
+                string item = sp[i].ToLower().Trim();
+                if (item == "") continue;
+                if (dic.ContainsKey(item))
+                {
+                    dic[item]++;
+                }
+                else
+                {
+                    dic[item] = 1;
+                }
+            }
+
+
+
+            string pk="", sk="", tk="";
+            int pv=0, sv=0, tv=0;
+
+            foreach (KeyValuePair<string, int> kvp in dic)
+            {
+                if (kvp.Value > pv)
+                {
+
+                    //third = second
+                    //second = first
+                    tk = sk;
+                    tv = sv;
+
+                    sk = pk;
+                    sv = pv;
+
+                    pv = kvp.Value;
+                    pk = kvp.Key;
+                }
+                else if (kvp.Value > sv)
+                {
+                    tv = sv;
+                    tk = sk;
+
+                    sv = kvp.Value;
+                    sk = kvp.Key;
+                }
+                else if (kvp.Value > tv)
+                {
+                    tv = kvp.Value;
+                    tk = kvp.Key;
+                }
+            }
+
+            List<string> ans = new List<string>();
+            if (pk.Length > 0) ans.Add(pk);
+            if (sk.Length > 0) ans.Add(sk);
+            if (tk.Length > 0) ans.Add(tk);
+            //Console.WriteLine(pk + " " + sk + " " + tk);
+
+            return ans;
+        }
+
+
+
+
+
+
