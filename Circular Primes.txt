@@ -1,0 +1,27 @@
+
+
+https://www.codewars.com/kata/56b2333e2542c2aadb000079/solutions/python
+
+
+def esPrimo(n):
+    if n< 2:return False
+    if n == 2: return True
+    if n % 2 == 0: return False
+
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+
+
+
+def circular_prime(n):
+    s = str(n)
+    for i in range(0, len(s)):
+        print(s)
+        if not esPrimo( int( s) ):
+            return False
+        s = s[1: len(s)] + s[0] #rotacion
+    return True

@@ -1,0 +1,39 @@
+
+
+https://www.codewars.com/kata/5a1a514effe75fd63b0000f2/solutions/python
+
+
+def solve(s):
+    
+    dic = {}
+
+    for item in s:
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1
+
+    for item in dic:
+
+        dic[item] -= 1
+
+        if(dic[item] == 0):
+            del dic[item]
+
+        v = dic.values()
+
+        if(len(set(v)) == 1):
+            return True
+
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1 
+
+
+
+    return False
+
+
+print(solve('aabbccddd'))
+print(solve('abcde'))

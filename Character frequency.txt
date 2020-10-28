@@ -1,0 +1,82 @@
+
+https://www.codewars.com/kata/53e895e28f9e66a56900011a/solutions/cpp
+
+
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <cstddef> // std::size_t
+#include <string>
+#include <utility> // std::pair
+#include <vector>
+
+
+using namespace std;
+
+
+void ordenar(vector<size_t>& values, vector<char> & keys) {
+
+    for (int i = 0; i < values.size(); i++) {
+
+        for (int j = i + 1; j < values.size(); j++) {
+
+            if (values[i] < values[j]) {
+                int temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
+
+                char char_temp = keys[i];
+                keys[i] = keys[j];
+                keys[j] = char_temp;
+
+            }
+            else if (values[i] == values[j]) {
+
+                if (keys[i] > keys[j]) {
+                    char char_temp = keys[i];
+                    keys[i] = keys[j];
+                    keys[j] = char_temp;
+
+                    int temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+                }
+            }
+        }
+    }
+
+}
+
+
+std::vector<std::pair<char, std::size_t>> letter_frequency(const std::string& input) {
+
+    map<char, size_t> hash;
+
+    for (int i = 0; i < input.size(); i++) {
+        if (input[i] != ' ' && isalpha(input[i])) {
+            hash[std::tolower(input[i])] ++;
+        }
+    }
+
+    vector<char> keys;
+    vector<size_t> values;
+
+    for (map<char, size_t>::iterator it = hash.begin(); it != hash.end(); it++) {
+        keys.push_back(it->first);
+        values.push_back(it->second);
+    }
+
+
+    ordenar(values, keys);
+
+    std::vector<std::pair<char, std::size_t>> res;
+
+    for (size_t i = 0; i < keys.size(); i++) {
+        res.push_back(make_pair(keys[i], values[i]));
+    }
+
+    return res;
+}

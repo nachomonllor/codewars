@@ -1,0 +1,18 @@
+
+
+https://www.codewars.com/kata/56b18992240660a97c00000a/solutions/python
+
+
+from itertools import permutations 
+  
+
+def permutation_average(n):
+    
+    s = list(str(n))
+    perms = [float(''.join(e)) for e in permutations(s)] 
+    suma = 0
+    for x in set(perms):
+        #print(x) 
+        suma += int(x)
+
+    return round(suma / len(set(perms)))

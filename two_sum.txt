@@ -1,0 +1,25 @@
+https://www.codewars.com/kata/52c31f8e6605bcc646000082/python
+
+
+def two_sum(numbers, target):
+   
+    frec = {}
+    
+    for i in range(0, len(numbers)):
+
+        if numbers[i] in frec:
+            frec[numbers[i]].append(i)
+        else:
+            frec[numbers[i]] = []
+            frec[numbers[i]].append(i)
+
+    for item in frec:
+
+        if target - item in frec:
+
+            if target - item == item:
+
+                return [ frec[ item][0], frec[ item][1]]
+            else:
+                return [ frec[ target - item][0], frec[ item][0]]
+    return [-1, -1]

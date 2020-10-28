@@ -1,0 +1,13 @@
+https://www.codewars.com/kata/554b4ac871d6813a03000035/solutions/python
+
+
+
+def high_and_low(numbers):
+
+    x = list(map(int, numbers.strip().split(' ')))
+
+    return [max(x), min(x)]
+
+
+
+print(high_and_low("1 2 3 4 5 66 "))

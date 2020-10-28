@@ -1,0 +1,21 @@
+
+
+https://www.codewars.com/kata/5f7c38eb54307c002a2b8cc8/solutions/python
+
+def remove_parentheses(s):
+
+    balanceado = 0
+
+    concat = ""
+
+    for i in range(0, len(s)):
+
+        if s[i] == '(':
+            balanceado += 1
+        elif s[i] == ')':
+            balanceado -= 1
+
+        elif balanceado == 0:
+            concat += s[i]
+
+    return concat

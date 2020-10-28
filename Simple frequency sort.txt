@@ -1,0 +1,132 @@
+
+https://www.codewars.com/kata/5a8d2bf60025e9163c0000bc/solutions/cpp
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <map>
+
+using namespace std;
+
+
+void ordenar( vector<int>  & values, vector<int>& keys ) {
+
+    for (int i = 0; i < values.size(); i++) {
+
+        for (int j = i + 1; j < values.size(); j++) {
+
+            if (values[i] < values[j]) {
+                int temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
+
+                temp = keys[i];
+                keys[i] = keys[j];
+                keys[j] = temp;
+
+            }
+            else if (values[i] == values[j]) {
+
+                if (keys[i] > keys[j]) {
+                    int temp = keys[i];
+                    keys[i] = keys[j];
+                    keys[j] = temp;
+
+                    temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+
+                }
+
+            }
+        }
+
+    }
+
+}
+
+
+std::vector<int> solve(const std::vector<int>& vec) {
+
+    map<int, int> frec;
+
+    for (int i = 0; i < vec.size(); i++) {
+        frec[vec[i]] ++;
+    }
+
+
+    vector<int> keys;
+    vector<int> values;
+    for (std::map<int, int>::iterator it = frec.begin(); it != frec.end(); it++) {
+        keys.push_back(it->first);
+        values.push_back(it->second);
+    }
+
+
+    ordenar(values, keys);
+
+    vector<int> res;
+
+    for (int i = 0; i < keys.size(); i++) {
+
+        for (int j = 0; j < values[i]; j++) {
+
+            res.push_back(keys[i]);
+
+        }
+    }
+
+
+    return res;
+
+}
+------------------------------------------------------
+
+#include <vector>
+#include <utility>
+#include <map>
+
+bool cmp(std::pair<int, int>& a, std::pair<int, int>& b) 
+{ 
+    return (a.second > b.second || ((a.second == b.second) && (a.first < b.first))); 
+}
+
+std::vector<std::pair<int, int>> mapsort(std::map<int, int> &m){
+  std::vector<std::pair<int,int>> a;
+  
+  for (auto& it: m){
+    a.push_back(it);
+  }
+  
+  std::sort(a.begin(), a.end(), cmp);
+  return a;
+}
+
+std::vector<int> solve(const std::vector<int> &vec) {
+  //..
+  std::map<int, int> tmp;
+  std::vector<std::pair<int,int>> tmpv;
+  std::vector<int> toReturn;
+  for (unsigned i = 0; i < vec.size(); ++i){
+    if (tmp.find(vec[i]) != tmp.end()){
+      tmp[vec[i]]++;
+    }
+    else {
+      tmp.insert({vec[i], 1});
+    }
+  }
+  tmpv = mapsort(tmp);
+  for (unsigned i = 0; i < tmpv.size(); ++i){
+    std::cout << tmpv[i].second << " " << tmpv[i].first << std::endl;
+  }
+  std::cout << std::endl;
+  int count;
+  for (unsigned i = 0; i < tmpv.size(); ++i){
+    count = 0;
+    while(count != tmpv[i].second){
+      toReturn.push_back(tmpv[i].first);
+      count++;
+    }
+  }
+  return toReturn;
+}

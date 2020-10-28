@@ -1,0 +1,31 @@
+
+
+https://www.codewars.com/kata/58a664bb586e986c940001d5/solutions/python
+
+def missing_alphabets(s):
+    #coding and coding..
+
+    frec = { }
+    for ch in range(ord('a'), ord('z') + 1):
+        frec[chr(ch)] = 0
+         
+    maximo = 0 
+    for item in s:
+        if item in frec:
+            frec[item] += 1
+        else:
+            frec[item] = 1
+        maximo = max(maximo, frec[item])
+
+
+    faltantes = ""
+
+    for ch in range(ord('a'), ord('z') + 1):
+        if maximo - frec[chr(ch)] > 0:
+            faltantes += (  (chr(ch) * ( maximo - frec[chr(ch)] ))  )
+
+    return faltantes
+
+#s = "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy"
+s = "abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxy"
+print(missing_alphabets(s))

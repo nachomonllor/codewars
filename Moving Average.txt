@@ -1,0 +1,22 @@
+
+https://www.codewars.com/kata/5c745b30f6216a301dc4dda5/solutions/python
+
+def moving_average(values,n):
+    
+    if n == 0 or n > len(values): return None
+    
+    media = 0
+    for i in range(0, n):
+        media += values[i]
+    
+
+    ans = []
+    ans.append(media / n)
+
+    for i in range(0, len(values) - n):
+        media -= values[i]
+        media += values[i + n]
+
+        ans.append(media/n)
+
+    return ans

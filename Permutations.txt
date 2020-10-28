@@ -1,0 +1,52 @@
+
+https://www.codewars.com/kata/5254ca2719453dcc0b00027d/solutions/python
+
+
+def nextPermutation(array):
+    i = len(array) - 1
+    while i > 0 and array[i-1] >= array[i]:
+        i-=1
+    if i <= 0:
+        return False
+
+    j = len(array) - 1
+
+    while array[j] <= array[i-1]:
+        j-=1
+
+    temp = array[i-1]
+    array[i-1] = array[j]
+    array[j] = temp
+
+    j = len(array) - 1
+
+    while i < j:
+        temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+
+        i+=1
+        j-=1
+
+    return True
+
+
+def permutations(string):
+
+    array = sorted(list(string))
+
+    ans = []
+
+    #print(''.join(array))
+    ans.append(''.join(array))
+    while nextPermutation(array):
+        #print(''.join(array))
+        ans.append(''.join(array))
+
+    return list(set(ans))
+
+print(permutations("dcba"))
+
+
+
+
