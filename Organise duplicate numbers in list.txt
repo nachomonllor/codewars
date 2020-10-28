@@ -1,0 +1,32 @@
+
+
+https://www.codewars.com/kata/5884b6550785f7c58f000047/python
+
+def group(arr):
+    #your code here
+
+    if arr == None or len(arr) == 0:
+        return []
+
+    frec = {}
+
+    for i in range(0, len(arr)):
+        if arr[i] in frec :
+            frec[arr[i]]+=1
+        else:
+            frec[arr[i]] = 1
+
+    visitados = set()
+    ans = []
+    for i in range(0, len(arr)):
+        if not arr[i] in visitados:
+            ans.append( [arr[i]] * frec[arr[i]] )
+            visitados.add(arr[i])
+
+
+    return ans
+
+
+
+#print(group([1, 100, 4, 2, 4]))
+print(group([-1, 1, -1])) # [[-1, -1], [1]])

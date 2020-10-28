@@ -1,0 +1,25 @@
+
+https://www.codewars.com/kata/576757b1df89ecf5bd00073b/python
+
+def tower_builder(n_floors):
+    # build here
+     
+    #return [ '*' * (n_floors * 2 - 1) ] * n_floors
+
+    ans = []
+
+    asteriscos = 1
+    espacios = (n_floors * 2 - 1) - asteriscos
+    for i in range(0, n_floors):
+
+        s = ' ' * (espacios//2) + ('*' * asteriscos) + ' ' * (espacios//2) 
+        ans.append(s)
+        asteriscos += 2
+        espacios = (n_floors * 2 - 1) - asteriscos
+
+    return ans
+
+
+
+
+print(tower_builder(3))

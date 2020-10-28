@@ -1,0 +1,21 @@
+
+https://www.codewars.com/kata/5993fb6c4f5d9f770c0000f2/python
+
+
+def sum_no_duplicates(l):
+    # write your solution here
+    frec = {}
+
+    #for i in range(0, len(l)):
+    for item in l:
+        if item in frec:
+            frec[item] += 1
+        else:
+            frec[item] = 1
+
+    suma = 0 
+
+    for item in frec:
+        if frec[item] == 1:
+            suma += item
+    return suma

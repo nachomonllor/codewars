@@ -1,0 +1,24 @@
+
+
+https://www.codewars.com/kata/56121f3312baa28c8500005b/solutions/python
+
+
+
+def biggest(nums):
+    
+    for i in range(0, len(nums)):
+
+        for j in range(i+1, len(nums)):
+
+            a = int(str(nums[i])+str(nums[j]))
+            b = int(str(nums[j])+str(nums[i]))
+
+            if a < b:
+                nums[i], nums[j] = nums[j], nums[i] #swap
+
+    #b =[str(x) for x in nums]
+    return str(int(''.join([str(x) for x in nums])))
+
+
+
+print((biggest([3, 30, 34, 5, 9])))

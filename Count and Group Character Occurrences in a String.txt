@@ -1,0 +1,33 @@
+
+https://www.codewars.com/kata/543e8390386034b63b001f31/solutions/python
+
+
+def get_char_count(s):
+    
+    s = s.lower()
+
+    dic = {}
+
+    for item in s:
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1
+
+    dic_ordenado_value = {}
+    for w in sorted(dic, key=dic.get, reverse=True):
+        #print(w, dic[w])
+        if w.isalnum():
+            if dic[w] in dic_ordenado_value:
+                dic_ordenado_value[dic[w]].append(w)
+            else:
+                dic_ordenado_value[dic[w]] = []
+                dic_ordenado_value[dic[w]].append(w)
+
+    for item in dic_ordenado_value:
+        dic_ordenado_value[item].sort()
+
+
+    return dic_ordenado_value
+
+print(get_char_count("Mississippi")) #{4: ["i", "s"], 2: ["p"], 1: ["m"]})

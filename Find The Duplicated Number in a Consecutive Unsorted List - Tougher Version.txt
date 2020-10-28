@@ -1,0 +1,12 @@
+
+https://www.codewars.com/kata/558f0553803bc3c4720000af/solutions/python
+
+def find_dup(arr):
+    #your code here
+    hash = set()
+
+    for item in arr:
+        if item in hash:
+            return item
+        hash.add(item)
+    return -1

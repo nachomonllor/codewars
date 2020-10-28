@@ -1,0 +1,47 @@
+
+
+https://www.codewars.com/kata/5245a9138ca049e9a10007b8/solutions/python
+
+
+def count_adjacent_pairs(st): 
+    
+    if len(st) == 0 or st == None: return 0
+
+    st = st.lower()
+    st = st.split(' ')
+
+    #actual = st[0]
+    cont = 0 
+
+    i = 0
+
+    while i < len(st):
+        actual = st[i]
+        aux_cont = 0
+        while i < len(st) and st[i] == actual:
+            aux_cont += 1 
+            i+=1
+
+        if aux_cont >= 2:
+            cont += 1
+
+        if i >= len(st):
+            break
+
+        actual = st[i]
+
+        #i+=1
+
+    return cont 
+
+
+
+#s = 'banana banana banana terracotta banana terracotta terracotta pie!'
+
+#print(count_adjacent_pairs(s))
+
+#print(count_adjacent_pairs(''))
+#print(count_adjacent_pairs('orange Orange kiwi pineapple apple'))
+#print(count_adjacent_pairs('banana banana banana'))
+print(count_adjacent_pairs('banana banana banana terracotta banana terracotta terracotta pie!'))
+print(count_adjacent_pairs('pineapple apple'))
