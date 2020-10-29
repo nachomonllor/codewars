@@ -1,0 +1,35 @@
+
+https://www.codewars.com/kata/5e07b5c55654a900230f0229/python
+
+def reverse_in_parentheses(string):
+
+
+
+    string = list(string)
+    stack = [] 
+
+    for i in range(0, len(string)):
+        if string[i] == '(':
+
+            stack.append([string[i], i])
+        elif string[i] == ')': 
+  
+            apertura = stack.pop()
+            rev = string[apertura[1]:i+1][::-1]
+
+            for j in range(0, len(rev)):
+                if rev[j] ==')': rev[j] = '('
+                elif rev[j] == '(': rev[j] = ')'
+
+
+            string[apertura[1]:i+1] = rev 
+
+
+    return ''.join(string)
+
+
+#print(reverse_in_parentheses("one (two (three) four)")) # "one (ruof (three) owt)"
+#print(reverse_in_parentheses("a ((d e) c b)")) # "a (b c (d e))"
+#print(reverse_in_parentheses("a ((d (a b) e) c b)")) # "a (b c (d e))"
+
+print(reverse_in_parentheses('( ()(( ) ) )')) # should equal '( (()) ( ) )'

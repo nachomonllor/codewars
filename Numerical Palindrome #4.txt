@@ -1,0 +1,53 @@
+
+def palindrome(num):
+    
+    if not isinstance(num, int):
+        return "Not valid"
+    if not str(num).isnumeric(): "Not valid"
+    if num <= 0: return "Not valid"
+
+    if str(num) == str(num)[::-1] and len(str(num)) >= 2:
+        return num 
+
+
+    izq = num
+
+    while True:
+        izq -= 1
+        if izq < 10: break
+
+        s = str(izq)
+        r = s[::-1]
+        if r == s and len(r) >= 2:
+            break
+
+    der = num
+    while True:
+        der += 1
+        s = str(der)
+        r = s[::-1]
+        if r == s and len(r) >= 2:
+            break
+    if izq < 10 :return der 
+
+    if num - izq < der - num:
+        return izq
+    elif num - izq > der - num:
+        return der
+
+    return der
+
+print(palindrome(8))
+
+
+-----------------------------------------
+
+
+def palindrome(num):
+    is_palindrome = lambda chunk: int(chunk) > 9 and chunk == chunk[::-1]
+    if not isinstance(num, int) or num < 0: return 'Not valid'
+    i = 0
+    while(True):
+        if is_palindrome(str(num + i)): return num + i
+        if is_palindrome(str(num - i)): return num - i
+        i += 1

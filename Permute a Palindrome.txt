@@ -1,0 +1,19 @@
+
+
+https://www.codewars.com/kata/58ae6ae22c3aaafc58000079/solutions/python
+
+def permute_a_palindrome (input): 
+  
+    frec = {}
+    for item in input:
+        if item in frec:
+            frec[item] +=1
+        else:
+            frec[item]  = 1
+    impares = 0
+    for item in frec:
+        if frec[item] % 2 != 0:
+            impares += 1
+        if impares > 1:
+            return False
+    return True

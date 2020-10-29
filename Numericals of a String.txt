@@ -1,0 +1,22 @@
+
+https://www.codewars.com/kata/5b4070144d7d8bbfe7000001/solutions/python
+
+def numericals(s):
+    
+    dic = {}
+
+    ans = ""
+
+    for item in s:
+
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1
+
+        ans += str(dic[item])
+
+    return ans
+
+
+print(numericals("Hello")) #11121

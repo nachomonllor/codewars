@@ -1,0 +1,22 @@
+https://www.codewars.com/kata/58e26b5d92d04c7a4f00020a/solutions/python
+
+def palindrome(num):
+    if not isinstance(num, int):
+        return "Not valid"
+    if not str(num).isnumeric(): "Not valid"
+    if num <= 0: return "Not valid"
+    if num < 10: return False
+    frec = {}
+
+    s = str(num)
+    for item in s:
+        if item in frec:
+            frec[item] += 1
+        else:
+            frec[item] = 1
+
+    impares = 0
+    for item in frec:
+        if frec[item] % 2 != 0:
+            impares += 1
+    return impares <= 1

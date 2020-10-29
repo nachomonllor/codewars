@@ -1,0 +1,37 @@
+
+
+https://www.codewars.com/kata/58df62fe95923f7a7f0000cc/solutions/python
+
+
+def palindrome(num):
+
+    #y = 1
+    if not isinstance(num, int):
+        return "Not valid"
+
+
+    if not str(num).isnumeric(): "Not valid"
+
+    if num <= 0: return "Not valid"
+
+    cont = 0 
+
+    s = str(num)
+
+    for i in range(0, len(s)):
+
+        for j in range(i+1, len(s)):
+
+            subs = s[i:j+1]
+            rev = subs[::-1]
+            #print(subs, rev)
+
+            if subs == rev:
+                #print(subs, rev)
+                cont += 1
+
+    return cont
+
+print(palindrome(8))
+print(palindrome(141221001))
+print(palindrome("abc"))

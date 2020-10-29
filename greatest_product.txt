@@ -1,0 +1,13 @@
+https://www.codewars.com/kata/529872bdd0f550a06b00026e/train/python
+
+def greatest_product(n):
+    
+    max_prod = 0
+    for i in range(0, len(n) - 4):
+
+        prod = 1
+        for j in range(i, i+ 5):
+            prod *= int(n[j])
+        max_prod = max(max_prod, prod)
+
+    return max_prod

@@ -1,0 +1,29 @@
+
+
+https://www.codewars.com/kata/59e19a747905df23cb000024/solutions/python
+
+def string_letter_count(s):
+    
+    frec = {}
+
+    s = s.lower()
+
+    for item in s:
+        if 'a' <= item and item <= 'z':
+            if item in frec:
+                frec[item] += 1
+            else:
+                frec[item] = 1
+
+    ordenado = dict( sorted(frec.items()))
+
+    concat = ""
+
+    for item in ordenado:
+        concat += (str(ordenado[item]) + item)
+
+    return concat
+    #for item in ordenado:
+
+
+print((string_letter_count("The time you enjoy wasting is not wasted time.")))

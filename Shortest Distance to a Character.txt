@@ -1,0 +1,28 @@
+
+https://www.codewars.com/kata/5c8bf3ec5048ca2c8e954bf3/solutions/python
+
+def shortest_to_char(s, c):
+    
+    if s == None or len(s) == 0: return []
+    
+    
+    indices_c = []
+
+    for i in range(0, len(s)):
+        if s[i] == c:
+            indices_c.append(i)
+
+    if len(indices_c) == 0: return []
+    
+    ans = []
+    for i in range(0, len(s)):
+
+        min_dif = len(s)
+        for item in indices_c:
+            min_dif = min(min_dif, abs(item - i))
+        ans.append(min_dif)
+
+    return ans
+
+
+print(shortest_to_char("aaaabbbb", "b"))

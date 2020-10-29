@@ -1,0 +1,44 @@
+
+
+https://www.codewars.com/kata/58e2708f9bd67fee17000080/solutions/python
+
+def palindrome(num):
+
+    #y = 1
+    if not isinstance(num, int):
+        return "Not valid"
+    if not str(num).isnumeric(): "Not valid"
+    if num <= 0: return "Not valid"
+
+    #cont = 0 
+
+    ans = []
+
+    s = str(num)
+
+    for i in range(0, len(s)):
+
+        for j in range(i+1, len(s)):
+
+            subs = str(int(s[i:j+1]))
+            rev = str(int(subs[::-1]))
+            #subs = int(subs)
+            #print(subs, rev)
+
+            if subs == rev and len(subs) >= 2:
+                #print(subs, rev)
+                #cont += 1
+                if subs != 0:
+
+                    ans.append(int(subs))
+
+    if len(ans) == 0:
+        return "No palindromes found"
+    return sorted(set(ans))
+
+print( palindrome( 1002001))
+#print(palindrome(10015885))
+
+#print(palindrome(8))
+#print(palindrome(141221001))
+#print(palindrome("abc"))

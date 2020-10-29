@@ -1,0 +1,30 @@
+
+
+https://www.codewars.com/kata/536c6b8749aa8b3c2600029a/solutions/python
+
+def sort_string(s, ordering):
+    frec = {}
+
+    orden = ""
+
+    for item in ordering:
+        if not item in orden:
+            orden += item 
+
+
+    for item in s:
+        if item in frec:
+            frec[item] += 1
+        else:
+            frec[item] = 1
+    concat = ""
+    for item in orden:
+        if item in frec:
+            concat += item * frec[item]
+
+    for item in s:
+        if not item in ordering:
+            concat += item
+
+            
+    return concat

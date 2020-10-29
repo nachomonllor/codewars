@@ -1,0 +1,35 @@
+
+https://www.codewars.com/kata/52774a314c2333f0a7000688/solutions/python
+
+
+def valid_parentheses(expr): 
+    stack = [] 
+  
+    # Traversing the Expression 
+    for char in expr: 
+        if char == '(':
+  
+            # Push the element in the stack 
+            stack.append(char) 
+        elif char == ')': 
+  
+            # IF current character is not opening 
+            # bracket, then it must be closing. 
+            # So stack cannot be empty at this point. 
+            if not stack: 
+                return False
+
+            stack.pop()
+           
+    # Check Empty Stack 
+    if stack: 
+        return False
+    return True
+
+
+
+print(valid_parentheses("  (")) # ,False)
+print(valid_parentheses(")test")) #,False)
+print(valid_parentheses("")) # ,True)
+print(valid_parentheses("hi())(")) #,False)
+print(valid_parentheses("hi(hi)()")) # ,True)
