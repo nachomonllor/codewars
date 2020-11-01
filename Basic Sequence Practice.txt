@@ -1,0 +1,29 @@
+
+
+https://www.codewars.com/kata/5436f26c4e3d6c40e5000282/solutions/python
+
+def sum_of_n(n):
+    # your code goes here
+    ans = []
+    sum = 0
+    agrego = 1
+    paso = 1
+    
+
+    if n < 0:
+       paso = -paso
+       n -= 1
+    else:
+        n += 1
+
+
+    for i in range(0, n, paso):
+        if n < 0: 
+            ans.append(-sum)
+        else:
+            ans.append(sum)
+        sum += agrego
+        agrego += 1
+    return ans
+
+print(sum_of_n(3))

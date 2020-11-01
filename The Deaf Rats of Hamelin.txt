@@ -1,0 +1,32 @@
+
+https://www.codewars.com/kata/598106cb34e205e074000031/solutions/python
+
+def count_deaf_rats(town):
+    # Your code here
+    intdice_P = town.index('P')
+
+
+    ratas_sordas = 0
+
+    #p = town[0]
+    #for i in range(0, len(town)):
+    i = 0
+    while i < len(town):
+
+        #if p == '~':
+
+        if town[i] == ' ' or town[i] == 'P':
+            i+=1
+
+        rata = town[i:i+2]
+
+        if rata == 'O~':
+            if i < intdice_P:
+                ratas_sordas += 1
+            i+=2
+        elif rata == '~O':
+            if i > intdice_P:
+                ratas_sordas += 1
+            i+=2
+
+    return ratas_sordas

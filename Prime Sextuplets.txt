@@ -1,0 +1,99 @@
+
+https://www.codewars.com/kata/57bf7fae3b3164dcac000352/solutions
+
+
+n = 6005904
+sieve = [True] * (n // 2)
+for i in range(3, int(n**0.5) + 1, 2):
+    if sieve[i // 2]:
+        sieve[i * i // 2::i] = [False] * ((n - i * i - 1) // (2 * i) + 1)
+primes = {2} | {(2 * i + 1) for i in range(1, n // 2) if sieve[i]}
+
+def find_primes_sextuplet(limit):
+    i = limit // 6 - 8
+    p = next(n for n in range(i, i+10) if n % 10 == 7)
+    while not {p, p+4, p+6, p+10, p+12, p+16}.issubset(primes):
+        p += 10
+    return [p, p+4, p+6, p+10, p+12, p+16]
+
+
+
+----------------------------------------------------
+
+
+import numpy, time
+
+memoPrimes, primesL, memoDict = set(), [], {}
+def primesfrom2to(n):
+    sieve = numpy.ones(n/3 + (n%6==2), dtype=numpy.bool)
+    for i in xrange(1,int(n**0.5)/3+1):
+        if sieve[i]:
+            k=3*i+1|1
+            sieve[       k*k/3     ::2*k] = False
+            sieve[k*(k-2*(i&1)+4)/3::2*k] = False
+    return numpy.r_[2,3,((3*numpy.nonzero(sieve)[0][1:]+1)|1)]
+
+def build_primes_data(limit):
+    global memoPrimes, primesL
+    primesL = primesfrom2to(limit).tolist()
+    memoPrimes = set(primesL)
+    
+
+def find_primes_sextuplet(sum_limit):
+    global memoPrimes, primesL, memoDict
+    steps = [0, 4, 6, 10, 12, 16]
+    if memoDict == {}:
+        build_primes_data(50000000)
+        for p in  primesL:
+            pS = []
+            for s in steps:
+                if p + s not in memoPrimes: break
+                pS.append(p + s)
+            if len(pS) == 6:
+                memoDict[sum(pS)] = tuple(pS)
+    for sum_ in sorted(memoDict.keys()):
+        if sum_ > sum_limit:
+            return list(memoDict[sum_])
+
+
+
+------------------------------------------------------------
+
+import numpy, time
+
+memoPrimes, primesL, memoDict = set(), [], {}
+def primesfrom2to(n):
+    sieve = numpy.ones(n//3 + (n%6==2), dtype=numpy.bool)
+    for i in range(1,int(n**0.5)//3+1):
+        if sieve[i]:
+            k=3*i+1|1
+            sieve[       k*k//3     ::2*k] = False
+            sieve[k*(k-2*(i&1)+4)//3::2*k] = False
+    return numpy.r_[2,3,((3*numpy.nonzero(sieve)[0][1:]+1)|1)]
+
+def build_primes_data(limit):
+    global memoPrimes, primesL
+    primesL = primesfrom2to(limit).tolist()
+    memoPrimes = set(primesL)
+    
+
+def find_primes_sextuplet(sum_limit):
+    global memoPrimes, primesL, memoDict
+    steps = [0, 4, 6, 10, 12, 16]
+    if memoDict == {}:
+        build_primes_data(6005904)
+        for p in  primesL:
+            pS = []
+            for s in steps:
+                if p + s not in memoPrimes: break
+                pS.append(p + s)
+            if len(pS) == 6:
+                memoDict[sum(pS)] = tuple(pS)
+    for sum_ in sorted(memoDict.keys()):
+        if sum_ > sum_limit:
+            return list(memoDict[sum_])
+
+
+
+
+

@@ -1,0 +1,36 @@
+
+
+https://www.codewars.com/kata/5b0d67c1cb35dfa10b0022c7/solutions/python
+
+def squares_needed(grains):
+    if grains == 0: return 0
+    casilla = 0
+    while True:
+        casilla+=1
+        if (2 ** casilla) >= grains and grains < (2 ** (casilla + 1)):
+            if  2 ** casilla == grains:
+                casilla += 1
+            break
+    return casilla 
+
+grains = 32
+print(squares_needed(grains))
+
+----------------------------------
+
+def squares_needed(grains):
+    #your code here
+    sum_wheat=0
+    if grains==0:
+        return 0
+    else:
+        for i in range(64):
+            sum_wheat+=2**i
+            if sum_wheat>=grains:
+                return i+1
+
+---------------------------------
+
+from math import log2
+def squares_needed(grains):
+    return int(log2(grains))+1 if grains else 0

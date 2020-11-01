@@ -1,0 +1,34 @@
+
+
+https://www.codewars.com/kata/54dc6f5a224c26032800005c/solutions/python
+
+def stock_list(listOfArt, listOfCat):
+    
+
+    dic = [0] * 26
+
+    for item in listOfArt:
+        s = item.split()
+        primer_letra = s[0][0]
+        cantidad = int(s[1])
+        dic[ord(primer_letra) - ord('A')] += cantidad
+
+    ans = []
+    todosCeros = True
+    for item in listOfCat:
+
+        if dic[ord(item) - ord('A')] > 0:
+            todosCeros = False
+
+        ans .append( "(" + str(item) + " : " + str(dic[ord(item) - ord('A')])  + ")" )
+
+    if todosCeros :
+        return ''
+
+    return ' - '.join(ans)
+        
+b = ["ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"]
+c = ["A", "B"]
+
+
+print(stock_list(b, c))

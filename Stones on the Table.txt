@@ -1,0 +1,19 @@
+
+https://www.codewars.com/kata/5f70e4cce10f9e0001c8995a/solutions/python
+
+def solution(stones):
+    
+    
+    i = 0
+    cont = 0 
+    while i < len(stones):
+
+        actual = stones[i]
+        while i < len(stones) and stones[i] == actual:
+            cont += 1
+            i += 1
+        cont -= 1
+    return cont
+
+
+print(solution("RGGRGBBRGRR")) # 3

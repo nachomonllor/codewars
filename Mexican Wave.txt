@@ -1,0 +1,22 @@
+
+https://www.codewars.com/kata/58f5c63f1e26ecda7e000029/python
+
+def wave(people):
+    # Code here
+
+    ans = []
+    if len(people) == 0: return ans
+
+    people = people.lower()
+
+    for i in range(len(people)):
+        if people[i] != ' ':
+            s = people[0: i] + people[i].upper() + people[i + 1:]
+            ans.append(s)
+
+    return ans
+
+
+print(wave(""))
+print(wave("hello"))
+print(wave("Two words"))

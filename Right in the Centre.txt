@@ -1,0 +1,33 @@
+
+
+https://www.codewars.com/kata/5f5da7a415fbdc0001ae3c69/python
+
+def is_in_middle(sequence):
+    
+
+    for i in range(0, len(sequence) - 2):
+
+        subs = sequence[i : i + 3]
+        
+        if subs == "abc":
+            izq = i 
+            der = len(sequence) - (i + 3)
+
+            if abs(izq - der ) <= 1:
+                return True
+    return False
+
+
+        #print(subs)
+
+
+
+#s = "AabcBBB"
+
+s = "abc"
+print(is_in_middle(s))
+
+------------------------------------
+def is_in_middle(s):
+    middle = s[(len(s)+1)//2-2:-((len(s)+1)//2-2)] if len(s)>4 else s
+    return "abc" in middle

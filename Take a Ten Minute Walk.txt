@@ -1,0 +1,30 @@
+
+https://www.codewars.com/kata/54da539698b8a2ad76000228/solutions/python
+
+
+def is_valid_walk(walk):
+    #determine if walk is valid
+    
+    if len(walk) != 10: return False
+
+    norte = 0
+    sur = 0
+    este = 0
+    oeste = 0
+
+    for item in walk:
+        if item == 'n':
+            norte += 1
+        elif item == 's':
+            sur += 1
+        elif item == 'e':
+            este += 1
+        else:
+            oeste += 1
+    return norte == sur and este == oeste
+
+#It should work also for a ['w', 'e', 'w', 'w', 'e', 'w', 'e', 'e'] walk: True should equal False
+
+walk = ['w', 'e', 'w', 'w', 'e', 'w', 'e', 'e']
+
+print(is_valid_walk(walk))

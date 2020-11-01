@@ -1,0 +1,19 @@
+
+
+https://www.codewars.com/kata/5f8a15c06dbd530016be0c19/solutions/python
+
+
+def duplicate_sandwich(arr):
+    
+    if len(arr) == 0: return []
+    
+    indices = {}
+
+    for i in range(0, len(arr)):
+
+        if arr[i] in indices:
+            return arr[indices[arr[i]] + 1: i]
+        else:
+            indices[arr[i]] = i
+
+    return arr

@@ -1,0 +1,36 @@
+
+
+https://www.codewars.com/kata/53697be005f803751e0015aa/solutions/python
+
+
+
+def encode(st):
+    
+    vocales = ['a','e','i','o','u']
+    e = ""
+    for i in range(0, len(st)):
+        if st[i] in vocales:
+            e += str( vocales.index(st[i]) + 1)
+        else:
+            e += st[i]
+    return e
+
+
+def decode(st):
+
+    vocales = ['a','e','i','o','u']
+    nums = ['1','2','3','4','5']
+    e = ""
+    for i in range(0, len(st)):
+        if st[i] in nums:
+            e += vocales[ int(st[i]) - 1]
+        else:
+            e += st[i]
+    return e
+
+    
+
+
+
+print(encode('hello'))
+print(decode('h2ll4'))

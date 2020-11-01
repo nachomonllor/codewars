@@ -1,0 +1,13 @@
+
+
+https://www.codewars.com/kata/546e2562b03326a88e000020/solutions/python
+
+
+def square_digits(num):
+    s = str(num)
+
+    concat = ""
+    for item in s:
+        concat += str(int(item) * int(item))
+    return int(concat)
+
