@@ -1,0 +1,29 @@
+
+https://www.codewars.com/kata/562846dd1f77ab7c00000033/solutions/python
+
+
+def word_pattern(pattern, string):
+    
+    string = string.split(' ')
+
+    if len(pattern) != len(string): return False
+
+    diccio = {}
+    diccio_s = {}
+
+    for i in range(0, len(pattern)):
+        if pattern[i] in diccio:
+            if diccio[pattern[i]] != string[i]:
+                return False
+        else:
+            diccio[pattern[i]] = string[i]
+
+        if string[i] in diccio_s:
+            if diccio_s[string[i]] != pattern[i]:
+                return False
+        else:
+            diccio_s[string[i]] = pattern[i]
+   
+
+
+    return True

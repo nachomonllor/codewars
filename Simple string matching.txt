@@ -1,0 +1,21 @@
+
+
+https://www.codewars.com/kata/5bc052f93f43de7054000188/solutions/python
+
+
+def solve(a,b):
+    
+    if len(a) - 1> len(b): return False
+    
+    indice_asterisco = a.find('*')
+
+    if indice_asterisco < 0 : 
+        if a == b : return True
+        return False
+
+    izq = a[0 : indice_asterisco]
+    der = a[indice_asterisco + 1 : ]
+
+    #print(izq, der)
+
+    return b.startswith(izq) and b.endswith(der)

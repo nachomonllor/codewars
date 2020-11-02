@@ -1,0 +1,16 @@
+
+
+https://www.codewars.com/kata/59b44d00bf10a439dd00006f/solutions/python
+
+
+def add(l):
+    # your code
+
+    ans = []
+    suma = 0
+    for i in range(0, len(l)):
+        suma+= l[i]
+        ans.append(suma)
+    return ans
+
+print(add([1,2,3,4,5,6]))

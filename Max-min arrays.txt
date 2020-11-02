@@ -1,0 +1,23 @@
+
+
+
+https://www.codewars.com/kata/5a090c4e697598d0b9000004/solutions/python
+
+
+
+def solve(arr):
+    arr = sorted(arr)
+    
+    i = 0
+    j = len(arr)-1
+    
+    ans = []
+    while i < j:
+        ans.append(arr[j])
+        ans.append(arr[i])
+        i+=1
+        j-=1
+    
+    if i == j: ans.append(arr[i])
+    
+    return ans

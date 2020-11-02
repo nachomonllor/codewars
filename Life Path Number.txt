@@ -1,0 +1,32 @@
+
+
+https://www.codewars.com/kata/5a1a76c8a7ad6aa26a0007a0/solutions/python
+
+def descomponer(n):
+    
+    copia = n
+
+    while len(str(copia)) != 1:
+        suma = 0
+        while copia > 0:
+            suma += copia % 10
+            copia = int(copia//10)
+        copia = suma
+
+    return copia
+
+
+def life_path_number(birthdate):
+    
+    x = list(map(int, birthdate.split('-')))
+    suma = 0
+    for i in range(0, len(x)):
+        suma += descomponer(x[i])
+    return descomponer(suma)
+
+
+
+
+#print(life_path_number("1955-10-28"))
+
+print(life_path_number("1971-06-28"))
