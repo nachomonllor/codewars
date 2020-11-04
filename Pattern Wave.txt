@@ -1,0 +1,33 @@
+
+
+
+https://www.codewars.com/kata/56e67d6166d442121800074c/train/python
+
+
+
+
+
+def draw(waves):
+    m = max(waves)
+    k  = 0
+    ans = []
+
+    for i in range(0, m ):
+        fila = ""
+        for j in range(0, len(waves)):
+            if m - i <= waves[k]: fila+=('■')
+            else: fila+=('□')
+            k+=1
+        ans.append(fila)
+        k = 0
+    return '\n'.join( ans)
+
+
+
+
+
+
+r = (draw([1,2,3,3,2,1]))
+
+for item in r:
+    print(item)

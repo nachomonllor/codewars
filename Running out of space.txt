@@ -1,0 +1,17 @@
+
+
+https://www.codewars.com/kata/56576f82ab83ee8268000059/solutions/python
+
+def spacey(array):
+    
+    ans = []
+    for i in range(0, len(array)): ans.append( ''.join(array[0:i+1]))
+    return ans
+
+
+print(spacey(['kevin', 'has','no','space']))
+
+-----------------------------------------------------------------------------------------------------
+
+def spacey(array):
+    return [''.join(array[:i+1]) for i in range(len(array))]

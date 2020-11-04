@@ -1,0 +1,40 @@
+
+
+
+https://www.codewars.com/kata/5aa3af22ba1bb5209f000037/solutions/python
+
+import re
+
+def solve(eq):
+    
+    s = re.split('[*+-/]', eq)
+    s = reversed(s)
+
+    op = []
+    
+    for item in eq:
+        if item in "+-*/":
+            op.append(item)
+
+    #op = op[::-1]
+    #print(op)
+
+
+    k = 0
+
+    concat = ""
+    for item in s:
+        
+        if len(op) > 0:
+            concat += (item + op.pop())
+        else:
+            concat += item
+        
+    return concat
+
+
+print(solve("a+b-c/d*30"))
+
+#Test.assert_equals(solve("100*b/y"),"y/b*100")
+#Test.assert_equals(solve("a+b-c/d*30"),"30*d/c-b+a")
+#Test.assert_equals(solve("a*b/c+50"),"50+c/b*a")
