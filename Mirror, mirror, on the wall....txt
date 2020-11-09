@@ -1,0 +1,10 @@
+
+https://www.codewars.com/kata/5f55ecd770692e001484af7d/solutions/python
+
+def mirror(data) :
+    #print(sorted(data))
+    #print( (sorted(data)[1::-1]))
+
+    return sorted(data) + sorted(data)[::-1][1:]
+
+print((mirror([1, 3, 2])))

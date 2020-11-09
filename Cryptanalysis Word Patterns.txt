@@ -1,0 +1,32 @@
+
+
+
+https://www.codewars.com/kata/5f3142b3a28d9b002ef58f5e/solutions/python
+
+def word_pattern(word):
+
+    word = word.lower()
+    indices = {}
+    
+    k  =0 
+    #for item in word:
+    for i in range(0, len(word)):
+        if not word[i] in indices:
+            indices[word[i]] = k
+            k+=1
+
+        
+    arr = []
+
+    for item in word:
+        arr.append(indices[item])
+    
+        
+    #print(','.join(str(x) for x in list_of_ints))
+
+    return '.'.join(str(x) for x in arr)
+
+
+
+word = "hello"
+print(word_pattern(word))

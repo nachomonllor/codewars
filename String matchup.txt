@@ -1,0 +1,23 @@
+
+https://www.codewars.com/kata/59ca8e8e1a68b7de740001f4/solutions/python
+
+
+def solve(a,b):
+
+    
+    dic = {}
+
+    for item in a:
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1
+
+    ans = []
+    for item in b:
+        if item in dic:
+            ans.append(dic[item])
+        else:
+            ans.append(0)
+
+    return ans

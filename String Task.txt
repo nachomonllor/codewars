@@ -1,0 +1,14 @@
+
+https://www.codewars.com/kata/598ab63c7367483c890000f4/solutions/python
+
+
+def string_task(s):
+    s = s.lower()
+    concat = ""
+    for item in s:
+        if not item in "aeiouy":
+            concat += '.' + item
+    return concat
+
+
+print(string_task("Tour"))

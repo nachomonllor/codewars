@@ -1,0 +1,50 @@
+
+
+https://www.codewars.com/kata/5ce6728c939bf80029988b57/solutions/python
+
+def solve(st):
+
+    dic = {}
+
+    for item in st:
+        if ord(item) in dic:
+            dic[ord(item)] += 1
+        else:
+            dic[ord(item)] = 1
+
+    i = 0
+    
+    while i < len(st):
+
+        izq = ord(st[i]) - 1
+        der = ord(st[i]) + 1
+
+        cont = 1
+        while izq in dic:
+            if izq in dic and dic[izq] > 1:
+                return False
+            izq -= 1
+            cont += 1
+
+        if cont == len(st):
+            return True
+
+        cont = 1
+        while der in dic:
+            if der in dic and dic[der] > 1:
+                return False
+            der += 1
+            cont += 1
+        if cont == len(st):
+            return True
+
+        i += 1
+    return False
+
+
+
+print(solve("abc")) #True
+print(solve("abd")) # False)
+print(solve("dabc")) #True)
+print(solve("abbc")) #False
+
