@@ -1,0 +1,33 @@
+
+https://www.codewars.com/kata/56eff1e64794404a720002d2/solutions/python
+
+def testit(s):
+    s = s.lower()
+    cont = 0
+    i = 0
+
+    while i < len(s):
+        flag = False
+
+        if s[i] == 'w':
+            #busco la o
+            while i < len(s) and s[i] != 'o':
+                i += 1
+
+            while i < len(s) and s[i] != 'r':
+                i += 1
+
+            while i < len(s) and s[i] != 'd':
+                i += 1
+            if i < len(s) and s[i] == 'd':
+                flag = True
+        
+            if flag :
+                cont += 1
+        i += 1
+
+    return cont
+           
+    
+    
+print(testit("When you in order to do something by a wrong way, your heart will missed somewhere."))

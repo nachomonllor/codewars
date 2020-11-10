@@ -1,0 +1,9 @@
+
+
+https://www.codewars.com/kata/5a8d1c82373c2e099d0000ac/solutions/python
+
+def solve(st,a,b):
+    return st[0:a] +  st[a:b+1][::-1] + st[b+1:]
+
+
+print(solve("codewars",1,5))

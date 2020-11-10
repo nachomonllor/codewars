@@ -1,0 +1,37 @@
+
+
+https://www.codewars.com/kata/5a6a02adcadebf618400002b/train/python
+
+def sum_chars(s):
+    suma = 0
+    for item in s:
+        suma +=  ord(item)
+    return suma
+
+
+def my_hash_map(list_of_strings):
+    
+    hash = {}
+
+    for item in list_of_strings:
+        
+        s = sum_chars(item)
+        #print(s)
+
+        if s in hash:
+            hash[s].append(item)
+        else:
+            hash[s] = []
+            hash[s].append(item)
+
+    return hash
+
+
+------------------------------
+
+from collections import defaultdict
+
+def myHashMap(lst):
+    dct = defaultdict(list)
+    for w in lst: dct[sum(map(ord,w))].append(w)
+    return dct
