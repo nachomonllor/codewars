@@ -1,0 +1,15 @@
+
+
+https://www.codewars.com/kata/5667e8f4e3f572a8f2000039/solutions/python
+
+
+
+def accum(s):
+    # your code
+    #concat = ""
+    #for i in range(0, len(s)):
+    #    concat += (s[i] * (i+1)).capitalize()
+
+    #return concat
+     
+    return '-'.join((s[i] * (i+1)).capitalize() for i in range(0, len(s)) )
