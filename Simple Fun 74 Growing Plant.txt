@@ -1,0 +1,30 @@
+
+https://www.codewars.com/kata/58941fec8afa3618c9000184/solutions/python
+
+def growing_plant(upSpeed, downSpeed, desiredHeight):
+    #your code here
+
+    dias = 0
+
+    t = 0
+
+    while True:
+        dias += 1
+
+        t += upSpeed
+        if t>= desiredHeight:
+            return dias
+        t -= downSpeed
+
+        
+
+
+print(growing_plant(100,10,910))
+
+
+-------------------------------
+
+from math import ceil
+
+def growing_plant(up, down, h):
+    return max(ceil((h - down) / (up - down)), 1)

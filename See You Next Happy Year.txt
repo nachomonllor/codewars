@@ -1,0 +1,27 @@
+
+https://www.codewars.com/kata/5ae7e3f068e6445bc8000046/solutions/python
+
+def all_disinct(year):
+
+    hash = set()
+    for item in year:
+        if item in hash:
+            return False
+        hash.add(item)
+    return True
+
+
+def next_happy_year(year):
+    #your code here
+
+    next = int(year) + 1
+
+    while True:
+        #print(next)
+
+        if all_disinct(str(next)):
+            return next
+        next += 1
+
+
+print(next_happy_year(1001))

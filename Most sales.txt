@@ -1,0 +1,65 @@
+
+
+https://www.codewars.com/kata/5e16ffb7297fe00001114824/train/python
+
+def ordenarParalelos(products, res , n):
+
+    for i in range(0, n - 1):
+        for j in range(i + 1, n):
+            if res[i] < res[j]:
+
+                temp_res = res[i]
+                res[i] = res[j]
+                res[j] = temp_res 
+
+                temp_prod = products[i]
+                products[i] = products[j]
+                products[j] = temp_prod
+
+    #print(products)
+
+
+def top3(products, amounts, prices):
+
+    res = []
+
+    for i in range(0, len(products)):
+        res.append(amounts[i] * prices[i])
+
+    ordenarParalelos(products, res, len(products))
+
+    #return [ products[0], products[1], products[2] ]
+    return products[0:3]
+
+---------------------------------------------------------------
+
+
+def ordenarParalelos(products, res , n):
+
+    for i in range(0, n - 1):
+        for j in range(i + 1, n):
+            if res[i] < res[j]:
+                #swap
+                res[i], res[j] = res[j], res[i]
+                products[i], products[j] = products[j], products[i]
+
+def top3(products, amounts, prices):
+
+    res = []
+
+    for i in range(0, len(products)):
+        res.append(amounts[i] * prices[i])
+
+    ordenarParalelos(products, res, len(products))
+
+    return products[0:3]
+
+
+---------------------------------------------------------------------
+
+import heapq
+
+def top3(products, amounts, prices):
+    items = zip(products, amounts, prices)
+    return [product for product, _, _ in heapq.nlargest(3, items, key=lambda item: item[1] * item[2])]
+

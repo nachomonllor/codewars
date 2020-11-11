@@ -1,0 +1,21 @@
+
+
+
+https://www.codewars.com/kata/55733d3ef7c43f8b0700007c/solutions/python
+
+def pattern(n):
+    # Happy Coding ^_^
+
+    ans = []
+
+    top = 0
+    for i in range(0, n):
+        fila = ""
+        for j in range(n, top, -1):
+           fila+=str(j)
+        top += 1
+        ans.append(fila)
+
+    return '\n'.join( ans)
+
+print(pattern(5))
