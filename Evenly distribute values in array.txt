@@ -1,0 +1,49 @@
+
+https://www.codewars.com/kata/5bb50eb68f8bbdb4b300021d/solutions/python
+
+
+def distribute_evenly(lst):
+
+    frec = {}
+
+    for item in lst:
+        if item in frec:
+            frec[item] += 1
+        else:
+            frec[item] = 1
+
+    ans = []
+
+    while True:
+        todosVacios = True
+
+        for item in frec:
+            if frec[item] > 0:
+                todosVacios = False
+                ans.append(item)
+                frec[item] -= 1
+        if todosVacios:
+            break
+    return ans
+
+
+
+                
+input_ = ["one", "one", "two", "two", "three", "three", "four", "one"]
+
+print(distribute_evenly(input_))
+
+
+-----------------------------------------------------------------
+
+
+from collections import Counter
+
+def distribute_evenly(lst):
+    result, counter = [], Counter(lst)
+    for _ in lst:
+        for key in counter.keys():
+            if counter[key] > 0:
+                result.append(key)
+                counter[key] -= 1
+    return result

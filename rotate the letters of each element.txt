@@ -1,0 +1,91 @@
+
+
+https://www.codewars.com/kata/5e98712b7de14f0026ef1cc1/solutions/python
+
+
+def getAllRotations(word):
+
+    hash = set()
+    for i in range(0, len(word)):
+        r = (word[i:] + word[0:i]).lower()
+        hash.add(r)
+    return sorted(hash)
+
+def group_cities(seq): 
+    # your code here
+    seq = sorted(seq)
+
+    rotaciones = {}
+
+    for item in seq:
+        rot = ''.join( getAllRotations(item))
+
+        if rot in rotaciones:
+            rotaciones[rot].append(item)
+        else:
+            rotaciones[rot] = []
+            rotaciones[rot].append(item)
+       
+        rotaciones[rot] = sorted(set(rotaciones[rot]))
+        #print(rot)
+    
+    v = list(rotaciones.values())
+
+    for i in range(0, len(v) - 1):
+        for j in range(i + 1, len(v)):
+            a = v[i]
+            b = v[j]
+
+            if len(b) > len(a):
+                #b, a = a, b
+                v[i],v[j] = v[j], v[i]
+            elif len(a) == len(b):
+                join_a = ''.join(a)
+                join_b = ''.join(b)
+
+                if join_a > join_b:
+                    v[i],v[j] = v[j], v[i]
+
+
+    #print(v)
+    return v
+    
+
+#s = "1234"
+
+#for item in getAllRotations(s):
+#    print(item)
+
+print(group_cities([ 'aab','baa','aab', 'ea','ae', 'c','c','c','b','b','b','a','a','a','a','a','a'   ]))
+
+
+#print(group_cities(['Tokyo', 'London', 'Rome', 'Donlon', 'Kyoto', 'Paris', 'Okyot']))
+
+---------------------------------------------------------
+
+def group_cities(seq):
+    res = {}
+    for w in seq:
+        temp = [str(w[i:] + w[:i]).title() for i in range(1, len(w)) 
+                if str(w[i:] + w[:i]).title() in seq]
+        temp.append(w)
+        res[frozenset(temp)] = sorted(set(temp))
+    return sorted(res.values(), key=lambda x: (-len(x), x[0]))
+
+----------------------------------------------------------
+
+
+from collections import defaultdict
+
+def key(s):
+    s = s.lower().replace(' ', '')
+    return min(s[i:] + s[:i] for i in range(len(s)))
+
+def group_cities(seq): 
+    result = defaultdict(list)
+    for city in set(seq):
+        result[key(city)].append(city)
+    for cities in result.values():
+        cities.sort()
+    return sorted(result.values(), key=lambda cities: (-len(cities), cities[0]))
+

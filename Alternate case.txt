@@ -1,0 +1,17 @@
+https://www.codewars.com/kata/57a62154cf1fa5b25200031e/solutions/python
+
+
+def alternateCase(s):
+    # your code here
+
+    concat = ""
+    
+    for item in s:
+        if item.islower():
+            concat += item.upper()
+        else:
+            concat += item.lower()
+    return concat
+
+
+

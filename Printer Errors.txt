@@ -1,0 +1,11 @@
+
+https://www.codewars.com/kata/56541980fa08ab47a0000040/solutions/python
+
+def printer_error(s):
+    # your code
+    cont = 0
+
+    for item in s:
+        if ord(item) > ord('m'):
+            cont += 1
+    return str(cont) + "/" + str( len(s))

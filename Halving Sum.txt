@@ -1,0 +1,16 @@
+
+
+https://www.codewars.com/kata/5a58d46cfd56cb4e8600009d/solutions/python
+
+def halving_sum(n): 
+    # your code here
+    
+    suma = n
+    den = 2
+    for termino in range(0,100):
+        suma += (n // den)
+        den *= 2
+    return  suma
+
+
+print(halving_sum(127))

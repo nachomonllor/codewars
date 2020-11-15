@@ -1,0 +1,15 @@
+
+https://www.codewars.com/kata/5b180e9fedaa564a7000009a/train/python
+
+def solve(s):
+        
+    u,l =0,0
+
+    for item in s:
+        if 'a' <= item <= 'z':
+            l += 1
+        else:
+            u += 1
+    if l >= u:
+        return s.lower()
+    return s.upper()
