@@ -1,0 +1,31 @@
+
+
+https://www.codewars.com/kata/593c0ebf8b90525a62000221/solutions/python
+
+def group_groceries(groceries):
+    
+    groceries = groceries.split(',')
+    tipos = { 'fruit' : [], 'meat' : [], 'other' : [], 'vegetable' : [] }
+
+    for item in groceries:
+        s = item.split('_')
+        tipo = s[0]
+        nombre = s[1]
+
+        if tipo in tipos:
+            tipos[tipo].append(nombre)
+        else:
+            tipos['other'].append(nombre)
+
+    concat = []
+    for item in ['fruit', 'meat', 'other', 'vegetable']:
+        tipos[item] = sorted(tipos[item])
+        concat.append(item + ":" + ','.join(tipos[item]))
+   
+    return '\n'.join(concat)
+
+ 
+input_ = "fruit_banana,vegetable_carrot,fruit_apple,canned_sardines,drink_juice,fruit_orange"
+
+print(group_groceries(input_))
+

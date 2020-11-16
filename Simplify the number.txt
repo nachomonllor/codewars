@@ -1,0 +1,19 @@
+
+
+https://www.codewars.com/kata/5800b6568f7ddad2c10000ae/train/python
+
+def simplify(number): 
+    # your code here
+    
+    
+    concat = []
+    s = str(number)
+    for i in range(0, len(s)):
+        desc = int ( '1' + ('0' *  (len(s) - i - 1)))
+        if str(desc) != '1' and str(desc) != '0' and int(s[i]) * desc:
+            concat.append(s[i] +"*"+ str(desc))
+        elif s[i] != '0':
+            concat.append(s[i])
+
+
+    return '+'.join( concat)

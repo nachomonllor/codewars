@@ -1,0 +1,45 @@
+
+
+https://www.codewars.com/kata/5946a0a64a2c5b596500019a/solutions/python
+
+def sum_arrays(a, b):
+
+    while len(a) < len(b):
+        a.insert(0,0)
+    while len(b) < len(a):
+        b.insert(0,0)
+
+    suma = []
+    for i in range(len(a)):
+        suma.append(a[i] + b[i])
+    return suma
+
+
+def split_and_add(numbers, n):
+    
+    iteraciones = 0
+
+    s = numbers
+
+
+    while iteraciones < n and len(s) > 1:
+
+        izq = numbers[0: len(numbers)//2]
+        der = numbers[len(numbers)//2:]
+        s = sum_arrays(izq, der)
+        numbers = s
+        iteraciones += 1
+    return s
+
+
+
+
+print(split_and_add([1,2,3,4,5], 2)) # , [5,10])
+print(split_and_add([1,2,3,4,5], 3)) # [15])
+print(split_and_add([15], 3))# [15])
+print(split_and_add([32,45,43,23,54,23,54,34], 2))# [183, 125])
+print(split_and_add([32,45,43,23,54,23,54,34], 0)) # [32,45,43,23,54,23,54,34])
+print(split_and_add([3,234,25,345,45,34,234,235,345], 3)) # [305, 1195])
+print(split_and_add([3,234,25,345,45,34,234,235,345,34,534,45,645,645,645,4656,45,3], 4)) # [1040, 7712])
+print(split_and_add([23,345,345,345,34536,567,568,6,34536,54,7546,456], 20))# [79327])
+
