@@ -1,0 +1,21 @@
+
+
+
+https://www.codewars.com/kata/5a433c7a8f27f23bb00000dc/solutions/python
+
+def split_by_value(k, elements):
+    #your code here  
+    menores = []
+    mayores = []
+
+    for item in elements:
+        if item < k:
+            menores.append(item)
+        else:
+            mayores.append(item)
+
+    return menores + mayores
+   
+
+
+print(split_by_value(5, [1, 3, 5, 7, 6, 4, 2]))

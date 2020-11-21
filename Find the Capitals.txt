@@ -1,0 +1,25 @@
+
+
+https://www.codewars.com/kata/53573877d5493b4d6e00050c/solutions/python
+
+def capital(capitals): 
+    # your code here
+    ans = []
+    for item in capitals:
+        if "state" in item:
+            ans.append( "The capital of " + item["state"] + " is " + item['capital']); 
+        elif "country" in item:
+            ans.append( "The capital of " + item["country"] + " is " + item['capital']); 
+    return ans
+
+
+----------------------------------------------
+
+def capital(capitals): 
+    ans = []
+    for each in capitals:
+        a = each.get('state', '')
+        b = each.get('country', '')
+        c = each.get('capital')
+        ans.append('The capital of {}{} is {}'.format(a,b,c))
+    return ans

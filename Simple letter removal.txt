@@ -1,0 +1,53 @@
+
+https://www.codewars.com/kata/5b728f801db5cec7320000c7/python
+
+def solve(st,k): 
+    
+    frec = [0] * 26
+
+
+    for i in range(0, len(st)):
+        frec[ord(st[i]) - ord('a')] += 1
+
+    #for i in range(0, 26):
+    #    print(chr(i + 97) , frec[i ])
+
+    cont = 0
+
+    for i in range(26):
+        
+        if frec[i] < k:
+            
+            k -= frec[i]
+            frec[i] = 0
+        else:
+            frec[i] -= k
+            k = 0
+        if k <= 0:
+            break
+
+
+    #print("\n")
+    #for i in range(0, 26):
+    #    print(chr(i + 97) , frec[i ])
+
+    concat = ""
+    #for item in st:
+    for i in range(len(st) - 1, -1, -1):
+        item = st[i]
+        if frec[ord(item) - ord('a')] - 1 >= 0:
+            concat += item
+            frec[ord(item) - ord('a')] -= 1
+
+
+    return concat[::-1]
+    
+
+#print(solve('abracadabra', 8))
+#print(solve('abracadabra', 6))
+
+print(solve('abracadabra', 1)) # ,'bracadabra')
+print(solve('abracadabra', 2)) #,'brcadabra')
+print(solve('abracadabra', 6)) #,'rcdbr')
+print(solve('abracadabra', 8)) #,'rdr')
+print(solve('abracadabra', 50)) #,'')
