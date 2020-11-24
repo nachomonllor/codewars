@@ -1,0 +1,12 @@
+
+https://www.codewars.com/kata/59f7fc109f0e86d705000043/solutions/python
+
+
+def divisible_by_three(st): 
+
+    return sum(list(map(int, st)))%3 == 0
+
+
+
+   
+print(divisible_by_three('123'))

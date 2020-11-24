@@ -1,0 +1,19 @@
+
+
+https://www.codewars.com/kata/5d49c93d089c6e000ff8428c/solutions/python
+
+def save(sizes, hd): 
+    
+    ans = 0
+    suma = 0
+    for i in range(len(sizes)):
+        if suma + sizes[i] <= hd:
+            suma += sizes[i]
+            ans += 1
+        else:
+            break
+    return ans
+
+
+
+print(save([4,4,4,3,3], 11))

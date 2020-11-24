@@ -1,0 +1,25 @@
+
+https://www.codewars.com/kata/52ab60b122e82a6375000bad/solutions/python
+
+INSERTION SORT
+def sort_reindeer(reindeer_names):
+
+    for i in range(1, len(reindeer_names)):
+
+        indice = i
+
+        while indice > 0 and reindeer_names[indice - 1].split(' ')[1] > reindeer_names[indice].split(' ')[1]:
+            reindeer_names[indice], reindeer_names[indice - 1] = reindeer_names[indice - 1], reindeer_names[indice]
+            indice -= 1
+
+    return reindeer_names
+
+--------------------
+KEY
+def lastname(name):
+    name = name.split()
+    return name[1]
+    
+def sort_reindeer(reindeer_names):
+    reindeer_names.sort(key=lastname)
+    return reindeer_names

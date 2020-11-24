@@ -1,0 +1,38 @@
+
+
+https://www.codewars.com/kata/5888cba35194f7f5a800008b/solutions/python
+
+def asterisc_it(n): 
+    # your code here
+    #s = list(str(n))
+    s = ""
+    if type(n) == int:
+        s = str(n)
+    else:
+        s = ""
+
+        for i in range(len(n)):
+            s += str(n[i])
+
+    #for i in range(len(n))
+    
+    lista = ([' '] * (len(s ) * 2))
+
+    k = 0
+    for i in range(0, len(lista), 2):
+        lista[i] = s[k]
+        k+=1
+
+    for i in range(2, len(lista), 2):
+        if int(lista[i - 2]) % 2 == 0 and int(lista[i]) % 2 == 0:
+            lista[i - 1] =  '*'
+
+    r = []
+    for i in range(0, len(lista)):
+        if lista[i] != ' ':
+            r.append(lista[i])
+
+    return ''.join(r)
+
+
+print(asterisc_it([1, 4, 64, 68, 67, 23, 1]))
