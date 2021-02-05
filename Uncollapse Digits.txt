@@ -1,0 +1,24 @@
+https://www.codewars.com/kata/5a626fc7fd56cb63c300008c/solutions/python
+
+def uncollapse(digits):
+    # Happy coding!
+    set = {"zero", "one","two",
+                "three" ,
+                "four" ,
+                "five" ,
+                "six" ,
+                "seven" ,
+                "eight" ,
+                "nine" ,
+                "ten"}
+    ans = ""
+    concat = ""
+    for i in range(0, len(digits)):
+        concat += digits[i]
+
+        if concat in set:
+            ans += concat + " "
+            concat = ""
+    return ans.strip()
+
+print ( uncollapse("fivethreefivesixthreenineonesevenoneeight" ))
