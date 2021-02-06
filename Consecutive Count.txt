@@ -1,0 +1,25 @@
+
+https://www.codewars.com/kata/59c3e819d751df54e9000098/solutions/python
+
+def get_consective_items(items, key): 
+    # your code here
+    
+    cont = 0
+    max_cont = 0
+    s = str(items)
+    k = str(key)
+
+    for i in range(0, len(s)):
+        if s[i] == k[0]:
+            cont += 1
+        else:
+            max_cont = max(max_cont, cont)
+            cont = 0
+    max_cont = max(max_cont, cont)
+    return max_cont
+
+
+items = 9000
+key = 0
+
+print(get_consective_items(items, key))
