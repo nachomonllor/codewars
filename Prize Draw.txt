@@ -1,0 +1,81 @@
+
+https://www.codewars.com/kata/5616868c81a0f281e500005c/train/python
+
+
+def sumLetrasMasLen(s):
+
+    suma = 0
+    for letra in s:
+        if letra.islower():
+            suma += (ord(letra) - ord('a') + 1)
+        else:
+            suma += (ord(letra) - ord('A') + 1)
+    return suma + len(s)
+
+
+def rank(st, we, n):
+    # your code
+
+    if st == None or len(st) == 0:
+        return  "No participants"
+
+
+    arr = st.split(',')
+
+    l = len(arr)
+    nuevo = []
+    for i in range(0, l):
+        nuevo.append(sumLetrasMasLen(arr[i]) * we[i])
+
+    
+    for i in range(0, l-1):
+        for j in range(i+1, l):
+            if nuevo[i] < nuevo[j]:
+                arr[i], arr[j] = arr[j], arr[i]
+                nuevo[i], nuevo[j] = nuevo[j], nuevo[i]
+            elif nuevo[i] == nuevo[j]:
+                if arr[i] > arr[j]:
+                    arr[i], arr[j] = arr[j], arr[i]
+                    nuevo[i], nuevo[j] = nuevo[j], nuevo[i]
+
+    if n - 1 >= len(arr):
+        return "Not enough participants"
+    return arr[n-1]
+
+#st = "Addison,Jayden,Sofia,Michael,Andrew,Lily,Benjamin"
+#we = [4, 2, 1, 4, 3, 1, 2]
+#n = 8
+
+
+st = "Lagon,Lily"
+we = [1, 5]
+n = 2
+
+
+print(rank(st, we, n))
+
+
+#otra solucion
+
+def rank(st, we, n):
+    if not st:
+        return "No participants"
+    
+    if n>len(we):
+        return "Not enough participants"
+
+    name_score = lambda name,w: w*(len(name)+sum([ord(c.lower())-96for c in name]))
+    
+    scores= [name_score(s,we[i]) for i,s in enumerate(st.split(','))]
+    
+    scores = list(zip(st.split(','),scores))    
+    
+    scores.sort(key=lambda x: (-x[1],x[0]))
+    
+    return scores[n-1][0]
+
+
+
+
+
+   
