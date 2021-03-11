@@ -1,0 +1,25 @@
+https://www.codewars.com/kata/5964d7e633b908e172000046/python
+
+dic = { 3: {"ONE":1,"TWO":2,"SIX":6},
+        4: {"ZERO":0,"FOUR":4,"FIVE":5,"NINE":9 },
+        5: {"THREE":3,"SEVEN":7,"EIGHT":8}  }
+
+def recover(st): 
+    # your code here
+    ans = ""
+    for i in range(0, len(st)):
+        for k in range(3,6):
+            subs = st[i:i+k]
+            ord_subs = ''.join( sorted(subs))
+            for item in dic[k]:
+                oi = ''.join(sorted(item))
+                if oi == ord_subs:
+                    ans += str( dic[k][item])
+    if(len(ans)) == 0:
+        return 'No digits found'
+    return ans
+
+
+print(recover("NEOTWONEINEIGHTOWSVEEN"))
+
+print(recover(""))
