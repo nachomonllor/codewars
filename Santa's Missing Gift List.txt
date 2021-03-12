@@ -1,0 +1,29 @@
+https://www.codewars.com/kata/5665d30b3ea3d84a2c000025/python
+
+GIFTS = {
+  512: "Rubik's Cube",
+  256: 'Doll',
+  128: 'Football',
+  64: 'Lego',
+  32: 'Teddy',
+  16: 'Horse',
+  8: 'Chess Board',
+  4: 'Hoop',
+  2: 'Wooden Train',
+  1: 'Toy Soldier',
+
+}
+
+
+def gifts(number):
+    #return [] # Happy Coding ^_^
+    suma = 0
+
+    lista = []
+    for item in (GIFTS):
+        if suma + item <= number:
+            #print(item ," " , GIFTS[item] )
+            lista.append(GIFTS[item])
+            suma += item
+
+    return sorted(lista)
