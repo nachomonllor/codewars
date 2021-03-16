@@ -1,0 +1,25 @@
+https://www.codewars.com/kata/58a66c208b88b2de660000c3/solutions/python
+
+def missing_values(seq): 
+    # your code here
+    dic = {}
+
+    for item in seq:
+
+        if item in dic:
+            dic[item] += 1
+        else:
+            dic[item] = 1
+
+
+    prod = 1
+
+    for item in dic:
+
+        if dic[item] == 2:
+            prod *= item
+        elif dic[item] == 1:
+            prod *= (item * item)
+
+
+    return prod
